@@ -1,0 +1,17 @@
+- name: Manages TCL iApp templates on a BIG-IP
+  bigip_iapp_template:
+      content:               # Sets the contents of an iApp template directly to the specified value. This is for simple values, but can be used with lookup plugins for anything complex or with formatting. `content' must be
+                               provided when creating new templates.
+      force:                 # Specifies whether or not to force the uploading of an iApp. When `yes', will force update the iApp even if there are iApp services using it. This will not update the running service though. Use
+                               `bigip_iapp_service' to do that. When `no', will update the iApp only if there are no iApp services using the template.
+      name:                  # The name of the iApp template that you want to delete. This option is only available when specifying a `state' of `absent' and is provided as a way to delete templates that you may no longer have the
+                               source of.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Whether the iApp template should exist or not.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

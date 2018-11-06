@@ -1,0 +1,44 @@
+- name: Manage user accounts and user attributes on a BIG-IP
+  bigip_user:
+      full_name:             # Full name of the user.
+      partition:             # Device partition to manage resources on.
+      partition_access:      # Specifies the administrative partition to which the user has access. `partition_access' is required when creating a new account. Should be in the form "partition:role". Valid roles include
+                               `acceleration-policy-editor', `admin', `application-editor', `auditor' `certificate-manager', `guest', `irule-manager', `manager', `no-access' `operator', `resource-
+                               admin', `user-manager', `web-application-security-administrator', and `web-application-security-editor'. Partition portion of tuple should be an existing partition or
+                               the value 'all'.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      password_credential:   # Set the users password to this unencrypted value. `password_credential' is required when creating a new account.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      shell:                 # Optionally set the users shell.
+      state:                 # Whether the account should exist or not, taking action if the state is different from what is stated.
+      update_password:       # `always' will allow to update passwords if the user chooses to do so. `on_create' will only set the password for newly created users. When `username_credential' is `root', this value will be forced to
+                               `always'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      username_credential:   # (required) Name of the user to create, remove or modify. The `root' user may not be removed.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: create a new user by Dylan
+  bigip_user:
+    full_name: Dylan Swift #description
+    username_credential: dylan
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    password_credential: default
+    shell: bash
+
+- name: create a new user without password by Dylan
+  bigip_user:
+    full_name: Dylan Swift #description
+    username_credential: dylan3
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    shell: bash

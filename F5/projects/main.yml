@@ -1,0 +1,9 @@
+---
+- name: deployment https app
+  hosts: F5
+  connection: local
+  gather_facts: no
+  roles:
+    - bigip_vlan
+    - bigip_trunk
+    - bigip_irule

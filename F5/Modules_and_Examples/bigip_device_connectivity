@@ -1,0 +1,34 @@
+- name: Manages device IP configuration settings for HA on a BIG-IP
+  bigip_device_connectivity:
+      cluster_mirroring:     # Specifies whether mirroring occurs within the same cluster or between different clusters on a multi-bladed system. This parameter is only supported on platforms that have multiple blades, such as
+                               Viprion hardware. It is not supported on VE.
+      config_sync_ip:        # Local IP address that the system uses for ConfigSync operations.
+      failover_multicast:    # When `yes', ensures that the Failover Multicast configuration is enabled and if no further multicast configuration is provided, ensures that `multicast_interface', `multicast_address' and
+                               `multicast_port' are the defaults specified in each option's description. When `no', ensures that Failover Multicast configuration is disabled.
+      mirror_primary_address:   # Specifies the primary IP address for the system to use to mirror connections.
+      mirror_secondary_address:   # Specifies the secondary IP address for the system to use to mirror connections.
+      multicast_address:     # IP address for the system to send multicast messages associated with failover. When `failover_multicast' is `yes' and this option is not provided, a default of `224.0.0.245' will be used.
+      multicast_interface:   # Interface over which the system sends multicast messages associated with failover. When `failover_multicast' is `yes' and this option is not provided, a default of `eth0' will be used.
+      multicast_port:        # Port for the system to send multicast messages associated with failover. When `failover_multicast' is `yes' and this option is not provided, a default of `62960' will be used. This value must be
+                               between 0 and 65535.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      unicast_failover:      # Desired addresses to use for failover operations. Options `address' and `port' are supported with dictionary structure where `address' is the local IP address that the system uses for failover
+                               operations. Port specifies the port that the system uses for failover operations. If `port' is not specified, the default value `1026' will be used.  If you are
+                               specifying the (recommended) management IP address, use 'management-ip' in the address field.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manages device IP configuration settings for HA on a BIG-IP
+  bigip_device_connectivity:
+    cluster_mirroring: within-cluster
+    failover_multicast: no
+    config_sync_ip: 172.16.116.251
+    mirror_primary_address: 172.16.116.251
+    unicast_failover:
+      - address: management-ip
+      - address: 172.16.116.251 #failover

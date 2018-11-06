@@ -1,0 +1,31 @@
+- name: Import/Delete SSL keys from BIG-IP
+  bigip_ssl_key:
+      content:               # Sets the contents of a key directly to the specified value. This is used with lookup plugins or for anything with formatting or templating. This must be provided when `state' is `present'.
+      name:                  # (required) The name of the key.
+      partition:             # Device partition to manage resources on.
+      passphrase:            # Passphrase on key.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the key is uploaded to the device. When `absent', ensures that the key is removed from the device. If the key is currently in use, the module will not be able to remove
+                               the key.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+Examples:
+---
+- name: improt multi ssl certificates
+  hosts: F5
+  connection: local
+  gather_facts: no
+  vars:
+    ssl_rsa_certificates_patch: "../Files/ssl_certificates/rsa_2048"
+  tasks:
+  - name: import ssl keys by Dylan
+    bigip_ssl_key:
+      name: ssl_rsa-2048
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/ca_rsa_2048.key') }}"
+      state: present

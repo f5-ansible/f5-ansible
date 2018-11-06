@@ -1,0 +1,33 @@
+- name: Manages BIG-IP SNMP data collecting agent (DCA) monitors
+  bigip_monitor_snmp_dca:
+      agent_type:            # Specifies the SNMP agent running on the monitored server. When creating a new monitor, the default is `UCD' (UC-Davis).
+      community:             # Specifies the community name that the system must use to authenticate with the host server through SNMP. When creating a new monitor, the default value is `public'. Note that this value is case
+                               sensitive.
+      cpu_coefficient:       # Specifies the coefficient that the system uses to calculate the weight of the CPU threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is `1.5'.
+      cpu_threshold:         # Specifies the maximum acceptable CPU usage on the target server. When creating a new monitor, the default is `80' percent.
+      description:           # Specifies descriptive text that identifies the monitor.
+      disk_coefficient:      # Specifies the coefficient that the system uses to calculate the weight of the disk threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is `2.0'.
+      disk_threshold:        # Specifies the maximum acceptable disk usage on the target server. When creating a new monitor, the default is `90' percent.
+      interval:              # Specifies, in seconds, the frequency at which the system issues the monitor check when either the resource is down or the status of the resource is unknown. When creating a new monitor, the default is
+                               `10'.
+      memory_coefficient:    # Specifies the coefficient that the system uses to calculate the weight of the memory threshold in the dynamic ratio load balancing algorithm. When creating a new monitor, the default is `1.0'.
+      memory_threshold:      # Specifies the maximum acceptable memory usage on the target server. When creating a new monitor, the default is `70' percent.
+      name:                  # (required) Monitor name.
+      parent:                # The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the `snmp_dca' parent on the `Common' partition.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the monitor exists. When `absent', ensures the monitor is removed.
+      time_until_up:         # Specifies the number of seconds to wait after a resource first responds correctly to the monitor before setting the resource to 'up'. During the interval, all responses from the resource must be
+                               correct. When the interval expires, the resource is marked 'up'. A value of 0, means that the resource is marked up immediately upon receipt of the first correct
+                               response. When creating a new monitor, the default is `0'.
+      timeout:               # Specifies the number of seconds the target has in which to respond to the monitor request. When creating a new monitor, the default is `30' seconds. If the target responds within the set time period,
+                               it is considered 'up'. If the target does not respond within the set time period, it is considered 'down'. When this value is set to 0 (zero), the system uses the
+                               interval from the parent monitor. Note that `timeout' and `time_until_up' combine to control when a resource is set to up.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      version:               # Specifies the version of SNMP that the host server uses. When creating a new monitor, the default is `v1'. When `v1', specifies that the host server uses SNMP version 1. When `v2c', specifies that the
+                               host server uses SNMP version 2c.

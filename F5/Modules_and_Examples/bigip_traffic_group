@@ -1,0 +1,25 @@
+- name: Manages traffic groups on BIG-IP
+  bigip_traffic_group:
+      mac_address:           # Specifies the floating Media Access Control (MAC) address associated with the floating IP addresses defined for a traffic group. Primarily, a MAC masquerade address minimizes ARP communications or
+                               dropped packets as a result of failover. A MAC masquerade address ensures that any traffic destined for a specific traffic group reaches an available device after
+                               failover, which happens because along with the traffic group, the MAC masquerade address floats to the available device. Without a MAC masquerade address, the sending
+                               host must learn the MAC address for a newly-active device, either by sending an ARP request or by relying on the gratuitous ARP from the newly-active device. To unset
+                               the MAC address, specify an empty value (`""') to this parameter.
+      name:                  # (required) The name of the traffic group.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the traffic group exists. When `absent', ensures the traffic group is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manages traffic groups on BIG-IP
+  bigip_traffic_group:
+    name: traffic-group-2
+    state: present
+    mac_address: ""
+    

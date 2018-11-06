@@ -1,0 +1,15 @@
+- name: Manages service policies on a BIG-IP.
+  bigip_service_policy:
+      description:           # Description of the service policy.
+      name:                  # (required) Name of the service policy.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port_misuse_policy:    # The port misuse policy to attach to the service policy. Requires that `afm' be provisioned to use. If `afm' is not provisioned, this parameter will be ignored.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Whether the resource should exist or not.
+      timer_policy:          # The timer policy to attach to the service policy.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

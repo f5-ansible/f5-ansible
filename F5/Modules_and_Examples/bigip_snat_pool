@@ -1,0 +1,24 @@
+- name: Manage SNAT pools on a BIG-IP
+  bigip_snat_pool:
+      members:               # List of members to put in the SNAT pool. When a `state' of present is provided, this parameter is required. Otherwise, it is optional.
+      name:                  # (required) The name of the SNAT pool.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Whether the SNAT pool should exist or not.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+Examples:
+- name: Create a snatpool by Dylan
+  bigip_snat_pool:
+    members:
+      - 172.16.116.251
+      - 172.16.116.252
+    name: snat_pool_172.16.116.251_and_252
+    state: present

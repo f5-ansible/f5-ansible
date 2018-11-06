@@ -1,0 +1,11 @@
+- name: crete vlans by Dylan
+  bigip_vlan:
+    name: "{{ vlan_name }}"
+    state: present
+    tag: "{{ vlan_tag }}"
+    tagged_interfaces: "{{ vlan_tagged_interfaces }}"
+  register: result
+- name: test result
+  assert:
+    that:
+      - result is succeeded

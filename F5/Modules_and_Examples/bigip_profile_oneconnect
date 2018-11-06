@@ -1,0 +1,46 @@
+- name: Manage OneConnect profiles on a BIG-IP
+  bigip_profile_oneconnect:
+      description:           # Description of the profile.
+      idle_timeout_override:   # Specifies the number of seconds that a connection is idle before the connection flow is eligible for deletion. When creating a new profile, if this parameter is not specified, the default is provided
+                               by the parent profile. You may specify a number of seconds for the timeout override. When `disabled', specifies that there is no timeout override for the connection.
+                               When `indefinite', Specifies that a connection may be idle with no timeout override.
+      limit_type:            # When `none', simultaneous in-flight requests and responses over TCP connections to a pool member are counted toward the limit. This is the historical behavior. When `idle', idle connections will be
+                               dropped as the TCP connection limit is reached. For short intervals, during the overlap of the idle connection being dropped and the new connection being established,
+                               the TCP connection limit may be exceeded. When `strict', the TCP connection limit is honored with no exceptions. This means that idle connections will prevent new TCP
+                               connections from being made until they expire, even if they could otherwise be reused. `strict' is not a recommended configuration except in very special cases with
+                               short expiration timeouts. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      maximum_age:           # Specifies the maximum number of seconds allowed for a connection in the connection reuse pool. For any connection with an age higher than this value, the system removes that connection from the re-use
+                               pool. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      maximum_reuse:         # Specifies the maximum number of times that a server-side connection can be reused. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      maximum_size:          # Specifies the maximum number of connections that the system holds in the connection reuse pool. If the pool is already full, then a server-side connection closes after the response is completed. When
+                               creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      name:                  # (required) Specifies the name of the OneConnect profile.
+      parent:                # Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied `oneconnect' profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      share_pools:           # Indicates that connections may be shared not only within a virtual server, but also among similar virtual servers When `yes', all virtual servers that use the same OneConnect and other internal
+                               network profiles can share connections. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      source_mask:           # Specifies a value that the system applies to the source address to determine its eligibility for reuse. When creating a new profile, if this parameter is not specified, the default is provided by the
+                               parent profile. The system applies the value of this setting to the server-side source address to determine its eligibility for reuse. A mask of `0' causes the system to
+                               share reused connections across all source addresses. A host mask of `32' causes the system to share only those reused connections originating from the same source
+                               address. When you are using a SNAT or SNAT pool, the server-side source address is translated first and then the OneConnect mask is applied to the translated address.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: create oneconnect profile by Dylan
+  bigip_profile_oneconnect:
+    name: oneconnect_test
+    state: present
+    idle_timeout_override: disabled
+    limit_type: none
+    maximum_age: 86400
+    maximum_reuse: 1000
+    maximum_size: 10000
+    share_pools: yes
+    source_mask: 0.0.0.0

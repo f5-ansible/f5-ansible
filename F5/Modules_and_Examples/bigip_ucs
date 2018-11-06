@@ -1,0 +1,33 @@
+- name: Manage upload, installation and removal of UCS files
+  bigip_ucs:
+      force:                 # If `yes' will upload the file every time and replace the file on the device. If `no', the file will only be uploaded if it does not already exist. Generally should be `yes' only in cases where you
+                               have reason to believe that the image was corrupted during upload.
+      include_chassis_level_config:   # During restore of the UCS file, include chassis level configuration that is shared among boot volume sets. For example, cluster default configuration.
+      no_license:            # Performs a full restore of the UCS file and all the files it contains, with the exception of the license file. The option must be used to restore a UCS on RMA devices (Returned Materials
+                               Authorization).
+      no_platform_check:     # Bypasses the platform check and allows a UCS that was created using a different platform to be installed. By default (without this option), a UCS created from a different platform is not allowed to be
+                               installed.
+      passphrase:            # Specifies the passphrase that is necessary to load the specified UCS file.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      reset_trust:           # When specified, the device and trust domain certs and keys are not loaded from the UCS. Instead, a new set is regenerated.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `installed', ensures that the UCS is uploaded and installed, on the system. When `present', ensures that the UCS is uploaded. When `absent', the UCS will be removed from the system. When
+                               `installed', the uploading of the UCS is idempotent, however the installation of that configuration is not idempotent.
+      ucs:                   # The path to the UCS file to install. The parameter must be provided if the `state' is either `installed' or `activated'. When `state' is `absent', the full path for this parameter will be ignored and
+                               only the filename will be used to select a UCS for removal. Therefore you could specify `/mickey/mouse/test.ucs' and this module would only look for `test.ucs'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manage upload, installation and removal of UCS files
+  bigip_ucs:
+    state: present
+    force: no
+    include_chassis_level_config: no
+    no_license: yes
+    no_platform_check: yes
+    reset_trust: no
+    ucs:

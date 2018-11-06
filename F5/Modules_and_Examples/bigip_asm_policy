@@ -1,0 +1,19 @@
+- name: Manage BIG-IP ASM policies
+  bigip_asm_policy:
+      active:                # If `yes' will apply and activate existing inactive policy. If `no', it will deactivate existing active policy. Generally should be `yes' only in cases where you want to activate new or existing
+                               policy.
+      file:                  # Full path to a policy file to be imported into the BIG-IP ASM. Policy files exported from newer versions of BIG-IP cannot be imported into older versions of BIG-IP. The opposite, however, is true; you
+                               can import older into newer.
+      name:                  # (required) The ASM policy to manage or create.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `state' is `present', and `file' or `template' parameter is provided, new ASM policy is imported and created with the given `name'. When `state' is present and no `file' or `template' parameter
+                               is provided new blank ASM policy is created with the given `name'. When `state' is `absent', ensures that the policy is removed, even if it is currently active.
+      template:              # An ASM policy built-in template. If the template does not exist we will raise an error. Once the policy has been created, this value cannot change. The `Comprehensive', `Drupal', `Fundamental',
+                               `Joomla', `Vulnerability Assessment Baseline', and `Wordpress' templates are only available on BIG-IP versions >= 13.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

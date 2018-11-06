@@ -1,0 +1,20 @@
+- name: Manage NTP servers on a BIG-IP
+  bigip_device_ntp:
+      ntp_servers:           # A list of NTP servers to set on the device. At least one of `ntp_servers' or `timezone' is required.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the NTP servers on the system. When `present', guarantees that the NTP servers are set on the system. When `absent', removes the specified NTP servers from the device configuration.
+      timezone:              # The timezone to set for NTP lookups. At least one of `ntp_servers' or `timezone' is required.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Set NTP server
+  bigip_device_ntp:
+    state: present
+    ntp_servers:
+      - 192.168.1.1
+    timezone: Asia/shanghai

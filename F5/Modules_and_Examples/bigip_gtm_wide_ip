@@ -1,0 +1,20 @@
+- name: Manages F5 BIG-IP GTM wide ip
+  bigip_gtm_wide_ip:
+      aliases:               # Specifies alternate domain names for the web site content you are load balancing. You can use the same wildcard characters for aliases as you can for actual wide IP names.
+      irules:                # List of rules to be applied. If you want to remove all existing iRules, specify a single empty value; `""'. See the documentation for an example.
+      name:                  # (required) Wide IP name. This name must be formatted as a fully qualified domain name (FQDN). You can also use the alias `wide_ip' but this is deprecated and will be removed in a future Ansible
+                               version.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      pool_lb_method:        # (required) Specifies the load balancing method used to select a pool in this wide IP. This setting is relevant only when multiple pools are configured for a wide IP. The `round_robin' value is
+                               deprecated and will be removed in Ansible 2.9. The `global_availability' value is deprecated and will be removed in Ansible 2.9.
+      pools:                 # The pools that you want associated with the Wide IP. If `ratio' is not provided when creating a new Wide IP, it will default to 1.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present' or `enabled', ensures that the Wide IP exists and is enabled. When `absent', ensures that the Wide IP has been removed. When `disabled', ensures that the Wide IP exists and is disabled.
+      type:                  # Specifies the type of wide IP. GTM wide IPs need to be keyed by query type in addition to name, since pool members need different attributes depending on the response RDATA they are meant to supply.
+                               This value is required if you are using BIG-IP versions >= 12.0.0.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

@@ -1,0 +1,22 @@
+- name: Manage utility license assignment on BIG-IPs from a BIG-IQ
+  bigiq_utility_license_assignment:
+      device:                # When `managed' is `no', specifies the address, or hostname, where the BIG-IQ can reach the remote device to register. When `managed' is `yes', specifies the managed device, or device UUID, that you
+                               want to register. If `managed' is `yes', it is very important that you do not have more than one device with the same name. BIG-IQ internally recognizes devices by their
+                               ID, and therefore, this module's cannot guarantee that the correct device will be registered. The device returned is the device that will be used.
+      device_password:       # The password of the `device_username'. When `managed' is `no', this parameter is required.
+      device_port:           # Specifies the port of the remote device to connect to. If this parameter is not specified, the default of `443' will be used.
+      device_username:       # The username used to connect to the remote device. This username should be one that has sufficient privileges on the remote device to do licensing. Usually this is the `Administrator' role. When
+                               `managed' is `no', this parameter is required.
+      key:                   # (required) The registration key that you want choose an offering from.
+      managed:               # Whether the specified device is a managed or un-managed device. When `state' is `present', this parameter is required.
+      offering:              # Name of the license offering to assign to the device.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the device is assigned the specified license. When `absent', ensures the license is revokes from the remote device and freed on the BIG-IQ.
+      unit_of_measure:       # Sets the rate at which this license usage is billed. Depending on your license, you may have different units of measures available to you. If a particular unit is not available to you, the module will
+                               notify you at licensing time.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

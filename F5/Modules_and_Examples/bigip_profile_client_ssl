@@ -1,0 +1,36 @@
+- name: Manages client SSL profiles on a BIG-IP
+  bigip_profile_client_ssl:
+      allow_non_ssl:         # Enables or disables acceptance of non-SSL connections. When creating a new profile, the setting is provided by the parent profile.
+      cert_key_chain:        # One or more certificates and keys to associate with the SSL profile. This option is always a list. The keys in the list dictate the details of the client/key/chain combination. Note that BIG-IPs can
+                               only have one of each type of each certificate/key type. This means that you can only have one RSA, one DSA, and one ECDSA per profile. If you attempt to assign two RSA,
+                               DSA, or ECDSA certificate/key combo, the device will reject this. This list is a complex list that specifies a number of keys.
+      ciphers:               # Specifies the list of ciphers that the system supports. When creating a new profile, the default cipher list is provided by the parent profile.
+      name:                  # (required) Specifies the name of the profile.
+      options:               # Options that the system uses for SSL processing in the form of a list. When creating a new profile, the list is provided by the parent profile. When a `''' or `none' value is provided all options for
+                               SSL processing are disabled.
+      parent:                # The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the `clientssl' parent on the `Common' partition.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      secure_renegotiation:   # Specifies the method of secure renegotiations for SSL connections. When creating a new profile, the setting is provided by the parent profile. When `request' is set the ssystem request secure
+                               renegotation of SSL connections. `require' is a default setting and when set the system permits initial SSL handshakes from clients but terminates renegotiations from
+                               unpatched clients. The `require-strict' setting the system requires strict renegotiation of SSL connections. In this mode the system refuses connections to insecure
+                               servers, and terminates existing SSL connections to insecure servers.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+Examles:
+- name: crete ssl profile by Dylan
+  bigip_profile_client_ssl:
+    name: ssl_client_test
+    state: present
+    cert_key_chain:
+      - { cert: ssl_rsa-2048 , key: ssl_rsa_2048 , chain: ssl_rsa-2048_chain }
+      - { cert: default , key: default , chain: default}
+    ciphers: 'DEFAULT!TLSv1'
+    options：'' #fatal: [172.16.191.101]: FAILED! => {"changed": false, "msg": "value of options must be one or more of: netscape-reuse-cipher-change-bug, microsoft-big-sslv3-buffer, msie-sslv2-rsa-padding, ssleay-080-client-dh-bug, tls-d5-bug, tls-block-padding-bug, dont-insert-empty-fragments, no-ssl, no-dtls, no-session-resumption-on-renegotiation, no-tlsv1.1, no-tlsv1.2, single-dh-use, ephemeral-rsa, cipher-server-preference, tls-rollback-bug, no-sslv2, no-sslv3, no-tls, no-tlsv1, pkcs1-check-1, pkcs1-check-2, netscape-ca-dn-bug, netscape-demo-cipher-change-bug. Got no match for: test"}

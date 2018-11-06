@@ -1,0 +1,18 @@
+- name: Collect facts from F5 BIG-IP GTM devices
+  bigip_gtm_facts:
+      filter:                # Perform regex filter of response. Filtering is done on the name of the resource. Valid filters are anything that can be provided to Python's `re' module.
+      include:               # (required) Fact category to collect.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Get pool facts
+  bigip_gtm_facts:
+    include: pool
+    filter: my_pool

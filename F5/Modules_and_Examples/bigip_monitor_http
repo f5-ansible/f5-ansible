@@ -1,0 +1,42 @@
+- name: Manages F5 BIG-IP LTM http monitors
+  bigip_monitor_http:
+      description:           # The description of the monitor.
+      interval:              # The interval specifying how frequently the monitor instance of this template will run. If this parameter is not provided when creating a new monitor, then the default value will be 5. This value
+                               *must* be less than the `timeout' value.
+      ip:                    # IP address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'.
+      name:                  # (required) Monitor name.
+      parent:                # The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the `http' parent on the `Common' partition.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port:                  # Port address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'. Note that if specifying an IP address, a value between 1
+                               and 65535 must be specified.
+      provider:              # A dict object containing connection details.
+      receive:               # The receive string for the monitor call.
+      receive_disable:       # This setting works like `receive', except that the system marks the node or pool member disabled when its response matches the `receive_disable' string but not `receive'. To use this setting, you must
+                               specify both `receive_disable' and `receive'.
+      send:                  # The send string for the monitor call. When creating a new monitor, if this value is not provided, the default `GET /\r\n' will be used.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the monitor exists. When `absent', ensures the monitor is removed.
+      target_password:       # Specifies the password, if the monitored target requires authentication.
+      target_username:       # Specifies the user name, if the monitored target requires authentication.
+      time_until_up:         # Specifies the amount of time in seconds after the first successful response before a node will be marked up. A value of 0 will cause a node to be marked up immediately after a valid response is
+                               received from the node. If this parameter is not provided when creating a new monitor, then the default value will be 0.
+      timeout:               # The number of seconds in which the node or service must respond to the monitor request. If the target responds within the set time period, it is considered up. If the target does not respond within
+                               the set time period, it is considered down. You can change this number to any number you want, however, it should be 3 times the interval number of seconds plus 1
+                               second. If this parameter is not provided when creating a new monitor, then the default value will be 16.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+Examles:
+- name: crete http monitor by Dylan
+  bigip_monitor_http:
+    name: http_redirect
+    send: 'GET / HTTP/1.1'
+    receive: 'It works'
+    interval: 5
+    timeout: 16
+    time_until_up: 0

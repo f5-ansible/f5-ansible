@@ -1,0 +1,22 @@
+- name: Manipulate remote syslog settings on a BIG-IP
+  bigip_remote_syslog:
+      local_ip:              # Specifies the local IP address of the system that is logging. To provide no local IP, specify the value `none'. When creating a remote syslog, if this parameter is not specified, the default value
+                               `none' is used.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      remote_host:           # (required) Specifies the IP address, or hostname, for the remote system to which the system sends log messages.
+      remote_port:           # Specifies the port that the system uses to send messages to the remote logging server. When creating a remote syslog, if this parameter is not specified, the default value `514' is used.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', guarantees that the remote syslog exists with the provided attributes. When `absent', removes the remote syslog from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manipulate remote syslog settings
+  bigip_remote_syslog:
+    state: present
+    local_ip: none
+    remote_host: 172.16.191.200
+    remote_port: 514

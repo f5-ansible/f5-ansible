@@ -1,0 +1,30 @@
+- name: Manage HTTP compression profiles on a BIG-IP
+  bigip_profile_http_compression:
+      buffer_size:           # Maximum number of compressed bytes that the system buffers before inserting a Content-Length header (which specifies the compressed size) into the response. When creating a new profile, if this
+                               parameter is not specified, the default is provided by the parent profile.
+      description:           # Description of the HTTP compression profile.
+      gzip_level:            # Specifies the degree to which the system compresses the content. Higher compression levels cause the compression process to be slower. Valid values are between 1 (least compression and fastest) to 9
+                               (most compression and slowest).
+      gzip_memory_level:     # Number of kilobytes of memory that the system uses for internal compression buffers when compressing a server response.
+      gzip_window_size:      # Number of kilobytes in the window size that the system uses when compressing a server response.
+      name:                  # (required) Specifies the name of the compression profile.
+      parent:                # Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied `httpcompression' profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: create a http compression profile by Dylan
+  bigip_profile_http_compression:
+    name: http_compression
+    state: present
+    buffer_size: 4096
+    gzip_level:  1
+    gzip_memory_level: 8
+    gzip_window_size: 16

@@ -1,0 +1,21 @@
+- name: Install software images on a BIG-IP
+  bigip_software_install:
+      image:                 # Image to install on the remote device.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `installed', ensures that the software is installed on the volume and the volume is set to be booted from. The device is *not* rebooted into the new software. When `activated', performs the same
+                               operation as `installed', but the system is rebooted to the new software.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      volume:                # The volume to install the software image to.
+
+
+
+- name: Install software images by Dylan
+  bigip_software_install:
+    image: Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso
+    state: installed #activated
+    volume: HD1.1

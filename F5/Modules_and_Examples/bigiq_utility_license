@@ -1,0 +1,12 @@
+- name: Manage utility licenses on a BIG-IQ
+  bigiq_utility_license:
+      accept_eula:           # A key that signifies that you accept the F5 EULA for this license. A copy of the EULA can be found here https://askf5.f5.com/csp/article/K12902 This is required when `state' is `present'.
+      license_key:           # (required) The license key to install and activate.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the utility license on the system. When `present', guarantees that the license exists. When `absent', removes the license from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

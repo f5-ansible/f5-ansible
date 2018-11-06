@@ -1,0 +1,20 @@
+- name: Manages BIG-IQ FastL4 UDP applications
+  bigiq_application_fastl4_udp:
+      add_analytics:         # Collects statistics of the BIG-IP that the application is deployed to. This parameter is only relevant when specifying a `service_environment' which is a BIG-IP; not an SSG.
+      description:           # Description of the application.
+      inbound_virtual:       # Settings to configure the virtual which will receive the inbound connection.
+      name:                  # (required) Name of the new application.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      servers:               # A list of servers that the application is hosted on. If you are familiar with other BIG-IP setting, you might also refer to this list as the list of pool members. When creating a new application, at
+                               least one server is required.
+      service_environment:   # Specifies the name of service environment that the application will be deployed to. When creating a new application, this parameter is required. The service environment type will be discovered by this
+                               module automatically. Therefore, it is crucial that you maintain unique names for items in the different service environment types. SSGs are not supported for this type
+                               of application.
+      state:                 # The state of the resource on the system. When `present', guarantees that the resource exists with the provided attributes. When `absent', removes the resource from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      wait:                  # If the module should wait for the application to be created, deleted or updated.

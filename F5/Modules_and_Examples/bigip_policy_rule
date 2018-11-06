@@ -1,0 +1,20 @@
+- name: Manage LTM policy rules on a BIG-IP
+  bigip_policy_rule:
+      actions:               # The actions that you want the policy rule to perform. The available attributes vary by the action, however, each action requires that a `type' be specified. These conditions can be specified in any
+                               order. Despite them being a list, the BIG-IP does not treat their order as anything special.
+      conditions:            # A list of attributes that describe the condition. See suboptions for details on how to construct each list entry. The ordering of this list is important, the module will ensure the order is kept when
+                               modifying the task. The suboption options listed below are not required for all condition types, read the description for more details. These conditions can be specified
+                               in any order. Despite them being a list, the BIG-IP does not treat their order as anything special.
+      description:           # Description of the policy rule.
+      name:                  # (required) The name of the rule.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      policy:                # (required) The name of the policy that you want to associate this rule with.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the key is uploaded to the device. When `absent', ensures that the key is removed from the device. If the key is currently in use, the module will not be able to remove
+                               the key.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

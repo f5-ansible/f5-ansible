@@ -1,0 +1,25 @@
+- name: Manage BIG-IP device DNS settings
+  bigip_device_dns:
+      cache:                 # Specifies whether the system caches DNS lookups or performs the operation each time a lookup is needed. Please note that this applies only to Access Policy Manager features, such as ACLs, web
+                               application rewrites, and authentication.
+      ip_version:            # Specifies whether the DNS specifies IP addresses using IPv4 or IPv6.
+      name_servers:          # A list of name servers that the system uses to validate DNS lookups
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      search:                # A list of domains that the system searches for local domain lookups, to resolve local host names.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the variable on the system. When `present', guarantees that an existing variable is set to `value'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Set the DNS settings on the BIG-IP
+  bigip_device_dns:
+    name_servers:
+      - 114.114.114.114
+      - 8.8.8.8
+    search:
+      - localdomain
+      - lab.local

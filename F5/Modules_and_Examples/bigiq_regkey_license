@@ -1,0 +1,15 @@
+- name: Manages licenses in a BIG-IQ registration key pool
+  bigiq_regkey_license:
+      accept_eula:           # A key that signifies that you accept the F5 EULA for this license. A copy of the EULA can be found here https://askf5.f5.com/csp/article/K12902 This is required when `state' is `present'.
+      description:           # Description of the license.
+      license_key:           # (required) The license key to put in the pool.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      regkey_pool:           # (required) The registration key pool that you want to place the license in. You must be mindful to name your registration pools unique names. While BIG-IQ does not require this, this module does. If
+                               you do not do this, the behavior of the module is undefined and you may end up putting licenses in the wrong registration key pool.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the regkey license in the pool on the system. When `present', guarantees that the license exists in the pool. When `absent', removes the license from the pool.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

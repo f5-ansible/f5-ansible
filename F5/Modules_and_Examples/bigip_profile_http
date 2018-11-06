@@ -1,0 +1,35 @@
+- name: Manage HTTP profiles on a BIG-IP
+  bigip_profile_http:
+      description:           # Description of the profile.
+      dns_resolver:          # Specifies the name of a configured DNS resolver, this option is mandatory when `proxy_type' is set to `explicit'. Format of the name can be either be prepended by partition (`/Common/foo'), or
+                               specified just as an object name (`foo'). To remove the entry a value of `none' or `''' can be set, however the profile `proxy_type' must not be set as `explicit'.
+      encrypt_cookie_secret:   # Passphrase for cookie encryption. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      encrypt_cookies:       # Cookie names for the system to encrypt. To remove the entry completely a value of `none' or `''' should be set. When creating a new profile, if this parameter is not specified, the default is provided
+                               by the parent profile.
+      insert_xforwarded_for:   # When specified system inserts an X-Forwarded-For header in an HTTP request with the client IP address, to use with connection pooling. When creating a new profile, if this parameter is not specified,
+                               the default is provided by the parent profile.
+      name:                  # (required) Specifies the name of the profile.
+      parent:                # Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied `http' profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      proxy_type:            # Specifies the proxy mode for the profile. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      redirect_rewrite:      # Specifies whether the system rewrites the URIs that are part of HTTP redirect (3XX) responses. When set to `none' the system will not rewrite the URI in any HTTP redirect responses. When set to `all'
+                               the system rewrites the URI in all HTTP redirect responses. When set to `matching' the system rewrites the URI in any HTTP redirect responses that match the request URI.
+                               When set to `nodes' if the URI contains a node IP address instead of a host name, the system changes it to the virtual server address. When creating a new profile, if
+                               this parameter is not specified, the default is provided by the parent profile.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      update_password:       # `always' will update passwords if the `encrypt_cookie_secret' is specified. `on_create' will only set the password for newly created profiles.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: create a http profile by Dylan
+  bigip_profile_http:
+    name: http_redirect
+    state: present
+    proxy_type: Reverse
+    redirect_rewrite: all

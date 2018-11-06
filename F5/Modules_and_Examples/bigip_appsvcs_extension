@@ -1,0 +1,18 @@
+- name: Manage application service deployments
+  bigip_appsvcs_extension:
+      content:               # (required) Declaration of tenants configured on the system. This parameter is most often used along with the `file' or `template' lookup plugins. Refer to the examples section for correct usage. For
+                               anything advanced or with formatting consider using the `template' lookup. This can additionally be used for specifying application service configurations directly in
+                               YAML, however that is not an encouraged practice and, if used at all, should only be used for the absolute smallest of configurations to prevent your Playbooks from
+                               becoming too large. If you `content' includes encrypted values (such as ciphertexts, passphrases, etc), the returned `changed' value will always be true.
+      force:                 # Force updates a declaration. This parameter should be used in cases where your declaration includes items that are encrypted or in cases (such as WAF Policies) where you want a large reload to take
+                               place.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `state' is `present', ensures the configuration exists. When `state' is `absent', ensures that the configuration is removed.
+      tenants:               # A list of tenants that you want to remove. This parameter is only relevant when `state' is `absent'. It will be ignored when `state' is `present'. A value of `all' will remove all tenants. Tenants can
+                               be specified as a list as well to remove only specific tenants.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

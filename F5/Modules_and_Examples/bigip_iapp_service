@@ -1,0 +1,29 @@
+- name: Manages TCL iApp services on a BIG-IP
+  bigip_iapp_service:
+      description:           # Description of the iApp service. If this option is specified in the Ansible task, it will take precedence over any similar setting in the iApp Service payload that you provide in the `parameters'
+                               field.
+      device_group:          # The device group for the iApp service. If this option is specified in the Ansible task, it will take precedence over any similar setting in the iApp Service payload that you provide in the
+                               `parameters' field.
+      force:                 # Forces the updating of an iApp service even if the parameters to the service have not changed. This option is of particular importance if the iApp template that underlies the service has been updated
+                               in-place. This option is equivalent to re-configuring the iApp if that template has changed.
+      metadata:              # Metadata associated with the iApp service. If this option is specified in the Ansible task, it will take precedence over any similar setting in the iApp Service payload that you provide in the
+                               `parameters' field.
+      name:                  # (required) The name of the iApp service that you want to deploy.
+      parameters:            # A hash of all the required template variables for the iApp template. If your parameters are stored in a file (the more common scenario) it is recommended you use either the `file' or `template'
+                               lookups to supply the expected parameters. These parameters typically consist of the `lists', `tables', and `variables' fields.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the iApp service is created and running. When `absent', ensures that the iApp service has been removed.
+      strict_updates:        # Indicates whether the application service is tied to the template, so when the template is updated, the application service changes to reflect the updates. When `yes', disallows any updates to the
+                               resources that the iApp service has created, if they are not updated directly through the iApp. When `no', allows updates outside of the iApp. If this option is
+                               specified in the Ansible task, it will take precedence over any similar setting in the iApp Service payload that you provide in the `parameters' field.
+      template:              # The iApp template from which to instantiate a new service. This template must exist on your BIG-IP before you can successfully create a service. When creating a new service, this parameter is
+                               required.
+      traffic_group:         # The traffic group for the iApp service. When creating a new service, if this value is not specified, the default of `/Common/traffic-group-1' will be used. If this option is specified in the Ansible
+                               task, it will take precedence over any similar setting in the iApp Service payload that you provide in the `parameters' field.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

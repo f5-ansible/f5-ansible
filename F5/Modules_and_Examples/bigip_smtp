@@ -1,0 +1,25 @@
+- name: Manages SMTP settings on the BIG-IP
+  bigip_smtp:
+      authentication:        # Credentials can be set on an SMTP server's configuration even if that authentication is not used (think staging configs or emergency changes). This parameter acts as a switch to make the specified
+                               `smtp_server_username' and `smtp_server_password' parameters active or not. When `yes', the authentication parameters will be active. When `no', the authentication
+                               parameters will be inactive.
+      encryption:            # Specifies whether the SMTP server requires an encrypted connection in order to send mail.
+      from_address:          # Email address that the email is being sent from. This is the "Reply-to" address that the recipient sees.
+      local_host_name:       # Host name used in SMTP headers in the format of a fully qualified domain name. This setting does not refer to the BIG-IP system's hostname.
+      name:                  # (required) Specifies the name of the SMTP server configuration.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      smtp_server:           # SMTP server host name in the format of a fully qualified domain name. This value is required when create a new SMTP configuration.
+      smtp_server_password:   # Password that the SMTP server requires when validating a user.
+      smtp_server_port:      # Specifies the SMTP port number. When creating a new SMTP configuration, the default is `25' when `encryption' is `none' or `tls'. The default is `465' when `ssl' is selected.
+      smtp_server_username:   # User name that the SMTP server requires when validating a user.
+      state:                 # When `present', ensures that the SMTP configuration exists. When `absent', ensures that the SMTP configuration does not exist.
+      update_password:       # Passwords are stored encrypted, so the module cannot know if the supplied `smtp_server_password' is the same or different than the existing password. This parameter controls the updating of the
+                               `smtp_server_password' credential. When `always', will always update the password. When `on_create', will only set the password for newly created SMTP server
+                               configurations.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

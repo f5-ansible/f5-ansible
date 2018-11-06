@@ -1,0 +1,39 @@
+- name: Manage DNS profiles on a BIG-IP
+  bigip_profile_dns:
+      cache_name:            # Specifies the user-created cache that the system uses to cache DNS responses. When you select a cache for the system to use, you must also set `enable_dns_cache' to `yes'
+      enable_cache:          # Specifies whether the system caches DNS responses. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. When `yes', the BIG-IP system caches
+                               DNS responses handled by the virtual servers associated with this profile. When you enable this setting, you must also specify a value for `cache_name'. When `no', the
+                               BIG-IP system does not cache DNS responses handled by the virtual servers associated with this profile. However, the profile retains the association with the DNS cache
+                               in the `cache_name' parameter. Disable this setting when you want to debug the system.
+      enable_dns_express:    # Specifies whether the DNS Express engine is enabled. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile. The DNS Express engine receives
+                               zone transfers from the authoritative DNS server for the zone. If the `enable_zone_transfer' setting is also `yes' on this profile, the DNS Express engine also responds
+                               to zone transfer requests made by the nameservers configured as zone transfer clients for the DNS Express zone.
+      enable_dns_firewall:   # Specifies whether DNS firewall capability is enabled. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      enable_dnssec:         # Specifies whether the system signs responses with DNSSEC keys and replies to DNSSEC specific queries (e.g., DNSKEY query type). When creating a new profile, if this parameter is not specified, the
+                               default is provided by the parent profile.
+      enable_gtm:            # Specifies whether the system uses Global Traffic Manager to manage the response. When creating a new profile, if this parameter is not specified, the default is provided by the parent profile.
+      enable_zone_transfer:   # Specifies whether the system answers zone transfer requests for a DNS zone created on the system. When creating a new profile, if this parameter is not specified, the default is provided by the parent
+                               profile. The `enable_dns_express' and `enable_zone_transfer' settings on a DNS profile affect how the system responds to zone transfer requests. When the
+                               `enable_dns_express' and `enable_zone_transfer' settings are both `yes', if a zone transfer request matches a DNS Express zone, then DNS Express answers the request.
+                               When the `enable_dns_express' setting is `no' and the `enable_zone_transfer' setting is `yes', the BIG-IP system processes zone transfer requests based on the last
+                               action and answers the request from local BIND or a pool member.
+      name:                  # (required) Specifies the name of the DNS profile.
+      parent:                # Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied `dns' profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      process_recursion_desired:   # Specifies whether to process client-side DNS packets with Recursion Desired set in the header. When creating a new profile, if this parameter is not specified, the default is provided by the parent
+                               profile. If set to `no', processing of the packet is subject to the unhandled-query-action option.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      unhandled_query_action:   # Specifies the action to take when a query does not match a Wide IP or a DNS Express Zone. When `allow', the BIG-IP system forwards queries to a DNS server or pool member. If a pool is not associated
+                               with a listener and the Use BIND Server on BIG-IP setting is set to Enabled, requests are forwarded to the local BIND server. When `drop', the BIG-IP system does not
+                               respond to the query. When `reject', the BIG-IP system returns the query with the REFUSED return code. When `hint', the BIG-IP system returns the query with a list of
+                               root name servers. When `no-error', the BIG-IP system returns the query with the NOERROR return code. When creating a new profile, if this parameter is not specified,
+                               the default is provided by the parent profile.
+      use_local_bind:        # Specifies whether the system forwards non-wide IP queries to the local BIND server on the BIG-IP system. For best performance, disable this setting when using a DNS cache. When creating a new profile,
+                               if this parameter is not specified, the default is provided by the parent profile.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

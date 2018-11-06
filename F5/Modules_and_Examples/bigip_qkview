@@ -1,0 +1,25 @@
+- name: Manage qkviews on the device
+  bigip_qkview:
+      asm_request_log:       # When `True', includes the ASM request log data. When `False', excludes the ASM request log data.
+      complete_information:   # Include complete information in the qkview.
+      dest:                  # (required) Destination on your local filesystem when you want to save the qkview.
+      exclude:               # Exclude various file from the qkview.
+      exclude_core:          # Exclude core files from the qkview.
+      filename:              # Name of the qkview to create on the remote BIG-IP.
+      force:                 # If `no', the file will only be transferred if the destination does not exist.
+      max_file_size:         # Max file size, in bytes, of the qkview to create. By default, no max file size is specified.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: fetch qkview from f5 by Dylan
+  bigip_qkview:
+    asm_request_log: no
+    complete_information: yes
+    dest: "/Users/huaiqingcheng/Documents/myansible/F5/Files/qkview/test.qkview"

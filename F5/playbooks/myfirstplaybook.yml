@@ -1,0 +1,135 @@
+---
+- name: Create a VIP, pool, pool members, and nodes
+  hosts: F5
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: import ssl keys by Dylan
+    bigip_ssl_key:
+      name: ssl_rsa-2048
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/ca_rsa_2048.key') }}"
+      state: present
+    register: result
+
+  - name: test debug
+    debug:
+      var: ansible_facts
+      verbosity: 3
+
+
+  - name: import ssl certificates by Dylan
+    bigip_ssl_certificate:
+      name: ssl_rsa-2048
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/ca_rsa_2048.crt') }}"
+      state: present
+
+  - name: import ssl certificates 2 by Dylan
+    bigip_ssl_certificate:
+      name: ssl_rsa-2048_chain
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/chain.crt') }}"
+      state: present
+
+  - name: create a clientssl by Dylan
+    bigip_profile_client_ssl:
+      name: ssl_rsa_2048
+      cert_key_chain:
+        - cert: ssl_rsa-2048
+          key: ssl_rsa-2048
+          chain: ssl_rsa-2048_chain
+      ciphers: "default"
+  - name: crete a vlan 333 by Dylan
+    bigip_vlan:
+      name: vlan_333
+      tag: 333
+      tagged_interfaces: 1.3
+  - name: Create a trunk by Dylan
+    bigip_trunk:
+      name: server-trunk
+      interfaces:
+        - 1.3
+        - 1.4
+      lacp_enabled: yes
+      lacp_mode: active
+      state: present
+    ignore_errors: True # Used for VE
+
+  - name: create a bigip_selfip non-floating by Dylan
+    bigip_selfip:
+      name: 33.33.33.33
+      address: 33.33.33.33
+      netmask: 255.255.255.0
+      vlan: vlan_333
+      allow_service: all
+      traffic_group: /Common/traffic-group-local-only
+  - name: create a bigip_selfip floating by Dylan
+    bigip_selfip:
+      name: 33.33.33.34
+      address: 33.33.33.34
+      netmask: 255.255.255.0
+      vlan: vlan_333
+      allow_service: all
+      traffic_group: /Common/traffic-group-1
+  - name: Creating a pool by Dylan
+    bigip_pool:
+      description: my first test pool
+      lb_method: round-robin
+      monitor_type: single
+      monitors: http
+      name: web_pool_by_Dylan
+  - name: Create node1 by Dylan
+    bigip_node:
+      host: 172.16.116.200
+      name: node-1
+  - name: Create node2 by Dylan
+    bigip_node:
+      host: 172.16.116.201
+      name: node-2
+  - name: Add nodes to pool by Dylan
+    bigip_pool_member:
+      description: webserver-1
+      host: "{{ item.host }}"
+      name: "{{ item.name }}"
+      pool: web_pool_by_Dylan
+      port: 80
+    with_items:
+      - host: 172.16.116.200
+        name: node-1
+      - host: 172.16.116.201
+        name: node-2
+  - name: Create a snatpool by Dylan
+    bigip_snat_pool:
+      members:
+        - 172.16.116.251
+        - 172.16.116.252
+      name: snat_pool_172.16.116.251_and_252
+      state: present
+  - name: Create a rule by Dylan
+    bigip_irule:
+      name: rule_from_dylan
+      content: "{{ lookup ('file', '../Files/irules/http_redirect.tcl') }}"
+      module: ltm
+      state: present
+  - name: Create a virtual server by Dylan
+    bigip_virtual_server:
+      default_persistence_profile: /Common/cookie
+      fallback_persistence_profile: /Common/source_addr
+      irules: rule_from_dylan
+      ip_protocol: tcp
+      enabled_vlans:
+        - vlan_333
+        - vlan_115
+        - vlan_116
+      description: Created by Dylan
+      destination: 172.16.10.108
+      name: vs_172.16.10.108_443_vip
+      type: standard
+      state: present
+      pool: web_pool_by_Dylan
+      port: 443
+      snat: /Common/snat_pool_172.16.116.251_and_252
+      source: 0.0.0.0/0
+      profiles:
+        - tcp
+        - http
+        - name: ssl_rsa_2048
+          context: client-side

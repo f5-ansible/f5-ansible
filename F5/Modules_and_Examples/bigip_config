@@ -1,0 +1,31 @@
+- name: Manage BIG-IP configuration sections
+  bigip_config:
+      merge_content:         # Loads the specified configuration that you want to merge into the running configuration. This is equivalent to using the `tmsh' command `load sys config from-terminal merge'. If you need to read
+                               configuration from a file or template, use Ansible's `file' or `template' lookup plugins respectively.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      reset:                 # Loads the default configuration on the device. If this option is specified, the default configuration will be loaded before any commands or other provided configuration is run.
+      save:                  # The `save' argument instructs the module to save the running-config to startup-config. This operation is performed after any changes are made to the current running config. If no changes are made, the
+                               configuration is still saved to the startup config. This option will always cause the module to return changed.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      verify:                # Validates the specified configuration to see whether they are valid to replace the running configuration. The running configuration will not be changed. When this parameter is set to `yes', no change
+                               will be reported by the module.
+
+
+
+- name: save sys config
+  bigip_config:
+    save: yes
+
+- name: load sys config deafult
+  bigip_config:
+    reset: yes
+    save: yes
+
+- name: load sys config file /PATH/TO/file.scf
+  bigip_config:
+    merge_content: "{{ lookup('file', '/path/to/config.scf') }}"

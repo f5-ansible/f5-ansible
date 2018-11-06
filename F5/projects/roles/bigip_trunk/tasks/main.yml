@@ -1,0 +1,13 @@
+- name: Create trunks by Dylan
+  bigip_trunk:
+    name: "{{ item.name }}"
+    interfaces: "{{ item.interfaces }}"
+    lacp_enabled: yes
+    lacp_mode: active
+    state: present
+  loop: "{{ trunk_interface }}"
+  ignore_errors: True #comment in Non-VE platform
+- name: test result
+  assert:
+    that:
+      - not result|changed

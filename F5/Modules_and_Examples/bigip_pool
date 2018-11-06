@@ -1,0 +1,42 @@
+- name: Manages F5 BIG-IP LTM pools
+  bigip_pool:
+      description:           # Specifies descriptive text that identifies the pool.
+      lb_method:             # Load balancing method. When creating a new pool, if this value is not specified, the default of `round-robin' will be used.
+      metadata:              # Arbitrary key/value pairs that you can attach to a pool. This is useful in situations where you might want to annotate a pool to me managed by Ansible. Key names will be stored as strings; this
+                               includes names that are numbers. Values for all of the keys will be stored as strings; this includes values that are numbers. Data will be persisted, not ephemeral.
+      monitor_type:          # Monitor rule type when `monitors' is specified. When creating a new pool, if this value is not specified, the default of 'and_list' will be used. When `single' ensures that all specified monitors are
+                               checked, but additionally includes checks to make sure you only specified a single monitor. When `and_list' ensures that *all* monitors are checked. When `m_of_n'
+                               ensures that `quorum' of `monitors' are checked. `m_of_n' *requires* that a `quorum' of 1 or greater be set either in the playbook, or already existing on the device.
+                               Both `single' and `and_list' are functionally identical since BIG-IP considers all monitors as "a list".
+      monitors:              # Monitor template name list. If the partition is not provided as part of the monitor name, then the `partition' option will be used instead.
+      name:                  # (required) Pool name
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      priority_group_activation:   # Specifies whether the system load balances traffic according to the priority number assigned to the pool member. When creating a new pool, if this parameter is not specified, the default of `0' will
+                               be used. To disable this setting, provide the value `0'. Once you enable this setting, you can specify pool member priority when you create a new pool or on a pool
+                               member's properties screen. The system treats same-priority pool members as a group. To enable priority group activation, provide a number from `0' to `65535' that
+                               represents the minimum number of members that must be available in one priority group before the system directs traffic to members in a lower priority group. When a
+                               sufficient number of members become available in the higher priority group, the system again directs traffic to the higher priority group.
+      provider:              # A dict object containing connection details.
+      quorum:                # Monitor quorum value when `monitor_type' is `m_of_n'. Quorum must be a value of 1 or greater when `monitor_type' is `m_of_n'.
+      reselect_tries:        # Sets the number of times the system tries to contact a pool member after a passive failure.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      service_down_action:   # Sets the action to take when node goes down in pool.
+      slow_ramp_time:        # Sets the ramp-up time (in seconds) to gradually ramp up the load on newly added or freshly detected up pool members.
+      state:                 # When `present', guarantees that the pool exists with the provided attributes. When `absent', removes the pool from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+Examles:
+- name: Creating a pool by Dylan
+  bigip_pool:
+    name: web_pool_by_Dylan
+    state: present
+    description: my first test pool
+    lb_method: round-robin
+    monitor_type: single
+    monitors: http
+    slow_ramp_time: 300

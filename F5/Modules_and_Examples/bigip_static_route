@@ -1,0 +1,33 @@
+- name: Manipulate static routes on a BIG-IP
+  bigip_static_route:
+      description:           # Descriptive text that identifies the route.
+      destination:           # Specifies an IP address for the static entry in the routing table. When creating a new static route, this value is required. This value cannot be changed once it is set.
+      gateway_address:       # Specifies the router for the system to use when forwarding packets to the destination host or network. Also known as the next-hop router address. This can be either an IPv4 or IPv6 address. When it is
+                               an IPv6 address that starts with `FE80:', the address will be treated as a link-local address. This requires that the `vlan' parameter also be supplied.
+      mtu:                   # Specifies a specific maximum transmission unit (MTU).
+      name:                  # (required) Name of the static route.
+      netmask:               # The netmask for the static route. When creating a new static route, this value is required. This value can be in either IP or CIDR format. This value cannot be changed once it is set.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      pool:                  # Specifies the pool through which the system forwards packets to the destination.
+      provider:              # A dict object containing connection details.
+      reject:                # Specifies that the system drops packets sent to the destination.
+      route_domain:          # The route domain id of the system. When creating a new static route, if this value is not specified, a default value of `0' will be used. This value cannot be changed once it is set.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the static route exists. When `absent', ensures that the static does not exist.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      vlan:                  # Specifies the VLAN or Tunnel through which the system forwards packets to the destination. When `gateway_address' is a link-local IPv6 address, this value is required
+
+
+
+- name: Manipulate static routes on a BIG-IP
+  bigip_static_route:
+    name: default
+    destination: 0.0.0.0
+    netmask: 0.0.0.0
+    gateway_address: 172.16.116.1
+    mtu: 1500
+    route_domain: 0

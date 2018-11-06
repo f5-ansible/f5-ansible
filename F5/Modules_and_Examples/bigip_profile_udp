@@ -1,0 +1,26 @@
+- name: Manage UDP profiles on a BIG-IP
+  bigip_profile_udp:
+      datagram_load_balancing:   # Specifies, when `yes', that the system load balances UDP traffic packet-by-packet.
+      idle_timeout:          # Specifies the length of time that a connection is idle (has no traffic) before the connection is eligible for deletion. When creating a new profile, if this parameter is not specified, the remote
+                               device will choose a default value appropriate for the profile, based on its `parent' profile. When a number is specified, indicates the number of seconds that the UDP
+                               connection can remain idle before the system deletes it. When `0', or `indefinite', specifies that UDP connections can remain idle indefinitely. When `immediate',
+                               specifies that you do not want the UDP connection to remain idle, and that it is therefore immediately eligible for deletion.
+      name:                  # (required) Specifies the name of the profile.
+      parent:                # Specifies the profile from which this profile inherits settings. When creating a new profile, if this parameter is not specified, the default is the system-supplied `udp' profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the profile exists. When `absent', ensures the profile is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: create upd profile by Dylan
+  bigip_profile_udp:
+    name: upd_1005
+    state: present
+    datagram_load_balancing: no
+    idle_timeout: 1005

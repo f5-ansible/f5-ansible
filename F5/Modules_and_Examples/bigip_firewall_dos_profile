@@ -1,0 +1,17 @@
+- name: Manage AFM DoS profiles on a BIG-IP
+  bigip_firewall_dos_profile:
+      default_whitelist:     # The default whitelist address list for the system to use to determine which IP addresses are legitimate. The system does not examine traffic from the IP addresses in the list when performing DoS
+                               prevention. To define a new whitelist, use the `bigip_firewall_address_list' module.
+      description:           # The description of the DoS profile.
+      name:                  # (required) Specifies the name of the profile.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the resource exists. When `absent', ensures the resource is removed.
+      threshold_sensitivity:   # Specifies the threshold sensitivity for the DoS profile. Thresholds for detecting attacks are higher when sensitivity is `low', and lower when sensitivity is `high'. When creating a new profile, if
+                               this parameter is not specified, the default is `medium'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

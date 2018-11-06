@@ -1,0 +1,31 @@
+- name: Manage BIG-IP global settings
+  bigip_sys_global:
+      banner_text:           # Specifies the text to present in the advisory banner.
+      console_timeout:       # Specifies the number of seconds of inactivity before the system logs off a user that is logged on.
+      gui_setup:             # `enable' or `disabled' the Setup utility in the browser-based Configuration utility.
+      lcd_display:           # Specifies, when `enabled', that the system menu displays on the LCD screen on the front of the unit. This setting has no effect when used on the VE platform.
+      mgmt_dhcp:             # Specifies whether or not to enable DHCP client on the management interface
+      net_reboot:            # Specifies, when `enabled', that the next time you reboot the system, the system boots to an ISO image on the network, rather than an internal media drive.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      quiet_boot:            # Specifies, when `enabled', that the system suppresses informational text on the console during the boot cycle. When `disabled', the system presents messages and informational text on the console
+                               during the boot cycle.
+      security_banner:       # Specifies whether the system displays an advisory message on the login screen.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the variable on the system. When `present', guarantees that an existing variable is set to `value'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manage BIG-IP global settings
+  bigip_sys_global:
+    banner_text: 'This box is deployed by Dylan'
+    console_timeout: 500
+    gui_setup: disabled
+    lcd_display: disabled
+    mgmt_dhcp: disabled
+    net_reboot: disabled
+    quiet_boot: disabled
+    security_banner: 'you know what you are doing ?'

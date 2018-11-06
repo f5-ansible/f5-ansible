@@ -1,0 +1,42 @@
+- hosts: F5
+  gather_facts: no
+  remote_user: root
+  tasks:
+  - name: runner host using delegate_to
+    shell: |
+      cat /etc/hostname
+    delegate_to: localhost
+  - name: runner host without delegate_to and without connection_ssh
+    shell: |
+      cat /etc/hostname
+
+- hosts: F5
+  remote_user: root
+  connection: ssh
+  gather_facts: no
+  tasks:
+  - name: runner host using connection_ssh and delegate_to
+    shell: |
+      cat /etc/hostname
+    delegate_to: localhost
+  - name: runner host using connection_ssh without delegate_to
+    shell: |
+      cat /etc/hostname
+
+
+- hosts: F5
+  remote_user: root
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: runner host using local connection without delegate_to
+    shell: |
+      cat /etc/hostname
+  - name: runner host using local connection with delegate_to
+    shell: |
+      cat /etc/hostname
+    delegate_to: localhost
+  - name: runner host using local connection with delegate_to another host
+    shell: |
+      cat /etc/hostname
+    delegate_to: 172.16.191.101

@@ -1,0 +1,27 @@
+- name: Manipulate general SNMP settings on a BIG-IP
+  bigip_snmp:
+      agent_authentication_traps:   # When `enabled', ensures that the system sends authentication warning traps to the trap destinations. This is usually disabled by default on a BIG-IP.
+      agent_status_traps:    # When `enabled', ensures that the system sends a trap whenever the SNMP agent starts running or stops running. This is usually enabled by default on a BIG-IP.
+      allowed_addresses:     # Configures the IP addresses of the SNMP clients from which the snmpd daemon accepts requests. This value can be hostnames, IP addresses, or IP networks. You may specify a single list item of `default'
+                               to set the value back to the system's default of `127.0.0.0/8'. You can remove all allowed addresses by either providing the word `none', or by providing the empty
+                               string `""'.
+      contact:               # Specifies the name of the person who administers the SNMP service for this system.
+      device_warning_traps:   # When `enabled', ensures that the system sends device warning traps to the trap destinations. This is usually enabled by default on a BIG-IP.
+      location:              # Specifies the description of this system's physical location.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Manipulate general SNMP settings by Dylan
+  bigip_snmp:
+    agent_authentication_traps: disabled
+    agent_status_traps: disabled
+    allowed_addresses: ""
+    contact: dylan
+    device_warning_traps: enabled
+    location: BJ

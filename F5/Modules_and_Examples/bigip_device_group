@@ -1,0 +1,44 @@
+- name: Manage device groups on a BIG-IP
+  bigip_device_group:
+      auto_sync:             # Indicates whether configuration synchronization occurs manually or automatically. When creating a new device group, this option will default to `no'.
+      description:           # Description of the device group.
+      full_sync:             # Specifies whether the system synchronizes the entire configuration during synchronization operations. When `no', the system performs incremental synchronization operations, based on the cache size
+                               specified in `max_incremental_sync_size'. Incremental configuration synchronization is a mechanism for synchronizing a device-group's configuration among its members,
+                               without requiring a full configuration load for each configuration change. In order for this to work, all devices in the device-group must initially agree on the
+                               configuration. Typically this requires at least one full configuration load to each device. When creating a new device group, this option will default to `no'.
+      max_incremental_sync_size:   # Specifies the size of the changes cache for incremental sync. For example, using the default, if you make more than 1024 KB worth of incremental changes, the system performs a full synchronization
+                               operation. Using incremental synchronization operations can reduce the per-device sync/load time for configuration changes. This setting is relevant only when
+                               `full_sync' is `no'.
+      name:                  # (required) Specifies the name of the device group.
+      network_failover:      # Indicates whether failover occurs over the network or is hard-wired. This parameter is only valid for `type''s that are `sync-failover'.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      save_on_auto_sync:     # When performing an auto-sync, specifies whether the configuration will be saved or not. When `no', only the running configuration will be changed on the device(s) being synced to. When creating a new
+                               device group, this option will default to `no'.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `state' is `present', ensures the device group exists. When `state' is `absent', ensures that the device group is removed.
+      type:                  # Specifies that the type of group. A `sync-failover' device group contains devices that synchronize their configuration data and fail over to one another when a device becomes unavailable. A `sync-
+                               only' device group has no such failover. When creating a new device group, this option will default to `sync-only'. This setting cannot be changed once it has been set.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: create a sync-failover device group
+  bigip_device_group:
+    name: sync-failover
+    state: present
+    full_sync: no
+    auto_sync: no
+    type: sync-failover
+    network_failover: yes
+- name: create a sync-only device group
+  bigip_device_group:
+    name: sync-only
+    state: present
+    full_sync: no
+    auto_sync: yes
+    type: sync-failover
+    network_failover: yes

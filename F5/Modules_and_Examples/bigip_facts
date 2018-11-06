@@ -1,0 +1,12 @@
+- name: Collect facts from F5 BIG-IP devices
+  bigip_facts:
+      filter:                # Shell-style glob matching string used to filter fact keys. Not applicable for software, provision, and system_info fact categories.
+      include:               # (required) Fact category or list of categories to collect
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      session:               # BIG-IP session support; may be useful to avoid concurrency issues in certain circumstances.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

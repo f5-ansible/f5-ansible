@@ -1,0 +1,58 @@
+---
+- name: Create a VIP, pool, pool members, and nodes
+  hosts: F5
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: disable the software update settings of a BIG-IP by Dylan
+    bigip_software_update:
+      auto_check: no
+      auto_phone_home: no
+      frequency: weekly
+  - name: import software images by Dylan
+    bigip_software_image:
+      force: no
+      image: /Users/huaiqingcheng/Desktop/F5/Images/Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso
+  - name: Install software images by Dylan
+    bigip_software_install:
+      image: Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso
+      state: installed #activated
+      volume: HD1.1
+  - name: set dns by Dylan
+    bigip_device_dns:
+      state: present
+      name_servers:
+        - 114.114.114.114
+        - 8.8.8.8
+      search:
+        - localdomain
+        - lab.local
+
+  - name: set hostname by Dylan
+    bigip_hostname:
+      state: present
+      hostname: 'www.dylan.com.cn'
+
+  - name: Set NTP by Dylan
+    bigip_device_ntp:
+      state: present
+      ntp_servers:
+        - 192.168.1.1
+      timezone: Asia/shanghai
+  - name: create default management route by Dylan
+      bigip_management_route:
+        name: default
+        state: present
+        network: default
+        gateway: 172.16.191.1
+
+  - name: License BIG-IP using a key By Dylan
+    bigip_device_license:
+      license_key: "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXXX"
+
+  - name: set bigip module provisioning by Dylan
+    bigip_provision:
+      module: ltm     #fatal: [172.16.191.101]: FAILED! => {"changed": false, "msg": "value of module must be one of: afm, am, sam, asm, avr, fps, gtm, lc, ltm, pem, swg, ilx, apm, vcmp, cgnat, got: ls"}
+      level: nominal   #fatal: [172.16.191.101]: FAILED! => {"changed": false, "msg": "value of level must be one of: nominal, dedicated, minimum, got: normal"}
+
+  - name: 

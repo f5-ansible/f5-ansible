@@ -1,0 +1,44 @@
+- name: Manage VLANs on a BIG-IP system
+  bigip_vlan:
+      cmp_hash:              # Specifies how the traffic on the VLAN will be disaggregated. The value selected determines the traffic disaggregation method. You can choose to disaggregate traffic based on `source-address' (the
+                               source IP address), `destination-address' (destination IP address), or `default', which specifies that the default CMP hash uses L4 ports. When creating a new VLAN, if
+                               this parameter is not specified, the default of `default' is used.
+      dag_round_robin:       # Specifies whether some of the stateless traffic on the VLAN should be disaggregated in a round-robin order instead of using a static hash. The stateless traffic includes non-IP L2 traffic, ICMP, some
+                               UDP protocols, and so on. When creating a new VLAN, if this parameter is not specified, the default of (no) is used.
+      dag_tunnel:            # Specifies how the disaggregator (DAG) distributes received tunnel-encapsulated packets to TMM instances. Select `inner' to distribute packets based on information in inner headers. Select `outer' to
+                               distribute packets based on information in outer headers without inspecting inner headers. When creating a new VLAN, if this parameter is not specified, the default of
+                               `outer' is used. This parameter is not supported on Virtual Editions of BIG-IP.
+      description:           # The description to give to the VLAN.
+      mtu:                   # Specifies the maximum transmission unit (MTU) for traffic on this VLAN. When creating a new VLAN, if this parameter is not specified, the default value used will be `1500'. This number must be between
+                               576 to 9198.
+      name:                  # (required) The VLAN to manage. If the special VLAN `ALL' is specified with the `state' value of `absent' then all VLANs will be removed.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the VLAN on the system. When `present', guarantees that the VLAN exists with the provided attributes. When `absent', removes the VLAN from the system.
+      tag:                   # Tag number for the VLAN. The tag number can be any integer between 1 and 4094. The system automatically assigns a tag number if you do not specify a value.
+      tagged_interfaces:     # Specifies a list of tagged interfaces and trunks that you want to configure for the VLAN. Use tagged interfaces or trunks when you want to assign a single interface or trunk to multiple VLANs.
+      untagged_interfaces:   # Specifies a list of untagged interfaces and trunks that you want to configure for the VLAN.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+Examles:
+- name: crete a vlan 337 by Dylan
+  bigip_vlan:
+    name: "{{ item.name }}"
+    tag: "{{ item.tag }}"
+    tagged_interfaces: "{{ item.tagged_interfaces }}"
+  loop:
+  - name: vlan_337
+    tag: 337
+    tagged_interfaces:
+      - 1.2
+      - 1.3
+  - name: vlan_338
+    tag: 338
+    untagged_interfaces:
+      - 1.4

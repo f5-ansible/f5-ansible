@@ -1,0 +1,6 @@
+- name: Create a rule by Dylan
+  bigip_irule:
+    name: rule_from_dylan
+    content: "{{ lookup ( 'file' , 'http_redirection.yml') }}"
+    module: ltm
+    state: present

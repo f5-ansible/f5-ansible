@@ -1,0 +1,24 @@
+- name: Manage Datacenter configuration in BIG-IP
+  bigip_gtm_datacenter:
+      contact:               # The name of the contact for the data center.
+      description:           # The description of the data center.
+      location:              # The location of the data center.
+      name:                  # (required) The name of the data center.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The virtual address state. If `absent', an attempt to delete the virtual address will be made. This will only succeed if this virtual address is not in use by a virtual server. `present' creates the
+                               virtual address and enables it. If `enabled', enable the virtual address if it exists. If `disabled', create the virtual address if needed, and set state to `disabled'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Create data center "New York"
+  bigip_gtm_datacenter:
+    name: BJ-xierqi
+    state: present
+    location: BJ

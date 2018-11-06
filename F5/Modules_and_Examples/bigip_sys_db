@@ -1,0 +1,21 @@
+- name: Manage BIG-IP system database variables
+  bigip_sys_db:
+      key:                   # (required) The database variable to manipulate.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the variable on the system. When `present', guarantees that an existing variable is set to `value'. When `reset' sets the variable back to the default value. At least one of value and
+                               state `reset' are required.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      value:                 # The value to set the key to. At least one of value and state `reset' are required.
+
+
+
+- name: Manage BIG-IP system database variables
+  bigip_sys_db:
+    state: present
+    key: acceleration.log.level
+    value: show_name

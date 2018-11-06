@@ -1,0 +1,13 @@
+- name: Manages Javascript iApp packages on a BIG-IP
+  bigip_iapplx_package:
+      package:               # The iAppLX package that you want to upload or remove. When `state' is `present', and you intend to use this module in a `role', it is recommended that you use the `{{ role_path }}' variable. An
+                               example is provided in the `EXAMPLES' section. When `state' is `absent', it is not necessary for the package to exist on the Ansible controller. If the full path to the
+                               package is provided, the fileame will specifically be cherry picked from it to properly remove the package.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Whether the iAppLX package should exist or not.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

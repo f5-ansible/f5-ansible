@@ -1,0 +1,21 @@
+- name: Manage BIG-IP module provisioning
+  bigip_provision:
+      level:                 # Sets the provisioning level for the requested modules. Changing the level for one module may require modifying the level of another module. For example, changing one module to `dedicated' requires
+                               setting all others to `none'. Setting the level of a module to `none' means that the module is not activated. This parameter is not relevant to `cgnat' and will not be
+                               applied to the `cgnat' module.
+      module:                # (required) The module to provision in BIG-IP.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the provisioned module on the system. When `present', guarantees that the specified module is provisioned at the requested level provided that there are sufficient resources on the device
+                               (such as physical RAM) to support the provisioned module. When `absent', de-provision the module.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: set bigip module provisioning
+  bigip_provision:
+    module: ltm     #fatal: [172.16.191.101]: FAILED! => {"changed": false, "msg": "value of module must be one of: afm, am, sam, asm, avr, fps, gtm, lc, ltm, pem, swg, ilx, apm, vcmp, cgnat, got: ls"}
+    level: nominal   #fatal: [172.16.191.101]: FAILED! => {"changed": false, "msg": "value of level must be one of: nominal, dedicated, minimum, got: normal"}

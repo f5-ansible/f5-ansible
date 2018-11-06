@@ -1,0 +1,46 @@
+- name: Manages F5 BIG-IP GTM FirePass monitors
+  bigip_gtm_monitor_firepass:
+      cipher_list:           # Specifies the list of ciphers for this monitor. The items in the cipher list are separated with the colon `:' symbol. When creating a new monitor, if this parameter is not specified, the default list
+                               is `HIGH:!ADH'.
+      concurrency_limit:     # Specifies the maximum percentage of licensed connections currently in use under which the monitor marks the Secure Access Manager system up. As an example, a setting of 95 percent means that the
+                               monitor marks the Secure Access Manager system up until 95 percent of licensed connections are in use. When the number of in-use licensed connections exceeds 95 percent,
+                               the monitor marks the Secure Access Manager system down. When creating a new monitor, if this parameter is not specified, the default is `95'.
+      ignore_down_response:   # Specifies that the monitor allows more than one probe attempt per interval. When `yes', specifies that the monitor ignores down responses for the duration of the monitor timeout. Once the monitor
+                               timeout is reached without the system receiving an up response, the system marks the object down. When `no', specifies that the monitor immediately marks an object down
+                               when it receives a down response. When creating a new monitor, if this parameter is not provided, then the default value will be `no'.
+      interval:              # The interval specifying how frequently the monitor instance of this template will run. If this parameter is not provided when creating a new monitor, then the default value will be 30. This value
+                               *must* be less than the `timeout' value.
+      ip:                    # IP address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'. If this value is an IP address, then a `port' number must
+                               be specified.
+      max_load_average:      # Specifies the number that the monitor uses to mark the Secure Access Manager system up or down. The system compares the Max Load Average setting against a one-minute average of the Secure Access
+                               Manager system load. When the Secure Access Manager system-load average falls within the specified Max Load Average, the monitor marks the Secure Access Manager system
+                               up. When the average exceeds the setting, the monitor marks the system down. When creating a new monitor, if this parameter is not specified, the default is `12'.
+      name:                  # (required) Monitor name.
+      parent:                # The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the `tcp' parent on the `Common' partition.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port:                  # Port address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'. Note that if specifying an IP address, a value between 1
+                               and 65535 must be specified.
+      probe_timeout:         # Specifies the number of seconds after which the system times out the probe request to the system. When creating a new monitor, if this parameter is not provided, then the default value will be `5'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the monitor exists. When `absent', ensures the monitor is removed.
+      target_password:       # Specifies the password, if the monitored target requires authentication.
+      target_username:       # Specifies the user name, if the monitored target requires authentication.
+      timeout:               # The number of seconds in which the node or service must respond to the monitor request. If the target responds within the set time period, it is considered up. If the target does not respond within
+                               the set time period, it is considered down. You can change this number to any number you want, however, it should be 3 times the interval number of seconds plus 1
+                               second. If this parameter is not provided when creating a new monitor, then the default value will be 90.
+      update_password:       # `always' will update passwords if the `target_password' is specified. `on_create' will only set the password for newly created monitors.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Create a GTM FirePass monitor
+  bigip_gtm_monitor_firepass:
+    name: my_monitor
+    state: present
+    ip: 1.1.1.1
+    port: 80

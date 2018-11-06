@@ -1,0 +1,27 @@
+- name: Manage license installation and activation on BIG-IP devices
+  bigip_device_license:
+      accept_eula:           # Declares whether you accept the BIG-IP EULA or not. By default, this value is `no'. You must specifically declare that you have viewed and accepted the license. This module will not present you with
+                               that EULA though, so it is incumbent on you to read it. The EULA can be found here; https://support.f5.com/csp/article/K12902. This parameter is not required when
+                               `state' is `absent' and will be ignored if it is provided.
+      license_key:           # The registration key to use to license the BIG-IP. This parameter is required if the `state' is equal to `present'. This parameter is not required when `state' is `absent' and will be ignored if it is
+                               provided.
+      license_server:        # The F5 license server to use when getting a license and validating a dossier. This parameter is required if the `state' is equal to `present'. This parameter is not required when `state' is `absent'
+                               and will be ignored if it is provided.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the license on the system. When `present', only guarantees that a license is there. When `latest', ensures that the license is always valid. When `absent', removes the license on the
+                               system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: License BIG-IP using a key
+  bigip_device_license:
+    license_key: "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXXX"
+
+- name: Remove the license from the system
+  bigip_device_license:
+    state: "absent"

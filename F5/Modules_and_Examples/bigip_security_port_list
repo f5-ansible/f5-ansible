@@ -1,0 +1,18 @@
+- name: Manage port lists on BIG-IP AFM
+  bigip_firewall_port_list:
+      description:           # Description of the port list
+      name:                  # (required) Specifies the name of the port list.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port_lists:            # Simple list of existing port lists to add to this list. Port lists can be specified in either their fully qualified name (/Common/foo) or their short name (foo). If a short name is used, the
+                               `partition' argument will automatically be prepended to the short name.
+      port_ranges:           # A list of port ranges where the range starts with a port number, is followed by a dash (-) and then a second number. If the first number is greater than the second number, the numbers will be reversed
+                               so-as to be properly formatted. ie, 90-78 would become 78-90.
+      ports:                 # Simple list of port values to add to the list
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the address list and entries exists. When `absent', ensures the address list is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

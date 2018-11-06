@@ -1,0 +1,32 @@
+- name: Manages F5 BIG-IP GTM pools
+  bigip_gtm_pool:
+      alternate_lb_method:   # The load balancing mode that the system tries if the `preferred_lb_method' is unsuccessful in picking a pool.
+      availability_requirements:   # Specifies, if you activate more than one health monitor, the number of health monitors that must receive successful responses in order for the link to be considered available.
+      fallback_ip:           # Specifies the IPv4, or IPv6 address of the server to which the system directs requests when it cannot use one of its pools to do so. Note that the system uses the fallback IP only if you select the
+                               `fallback_ip' load balancing method.
+      fallback_lb_method:    # The load balancing mode that the system tries if both the `preferred_lb_method' and `alternate_lb_method's are unsuccessful in picking a pool.
+      members:               # Members to assign to the pool. The order of the members in this list is the order that they will be listed in the pool.
+      monitors:              # Specifies the health monitors that the system currently uses to monitor this resource. When `availability_requirements.type' is `require', you may only have a single monitor in the `monitors' list.
+      name:                  # (required) Name of the GTM pool.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      preferred_lb_method:   # The load balancing mode that the system tries first.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Pool state. When `present', ensures that the pool is created and enabled. When `absent', ensures that the pool is removed from the system. When `enabled' or `disabled', ensures that the pool is
+                               enabled or disabled (respectively) on the remote device.
+      type:                  # The type of GTM pool that you want to create. On BIG-IP releases prior to version 12, this parameter is not required. On later versions of BIG-IP, this is a required parameter.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Create a GTM pool
+  bigip_gtm_pool:
+    name: bigip_gtm_pool
+    state: present
+    preferred_lb_method:
+    members:
+    - 

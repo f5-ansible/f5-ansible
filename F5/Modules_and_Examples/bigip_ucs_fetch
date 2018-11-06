@@ -1,0 +1,23 @@
+- name: Fetches a UCS file from remote nodes
+  bigip_ucs_fetch:
+      backup:                # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.
+      create_on_missing:     # Creates the UCS based on the value of `src' if the file does not already exist on the remote system.
+      dest:                  # (required) A directory to save the UCS file into.
+      encryption_password:   # Password to use to encrypt the UCS file if desired
+      fail_on_missing:       # Make the module fail if the UCS file on the remote system is missing.
+      force:                 # If `no', the file will only be transferred if the destination does not exist.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      src:                   # The name of the UCS file to create on the remote server for downloading
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Fetches a UCS file from remote nodes
+  bigip_ucs_fetch:
+    src: cs_backup.ucs
+    dest: /tmp/cs_backup.ucs

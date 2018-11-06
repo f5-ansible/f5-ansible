@@ -1,0 +1,6 @@
+export F5_USER=admin
+export F5_PASSWORD=admin
+export F5_SERVER=172.16.191.101
+export F5_SERVER_PORT=443
+export F5_VALIDATE_CERTS=no
+export ANSIBLE_KEEP_REMOTE_FILES=1   ~/.ansible/tmp/

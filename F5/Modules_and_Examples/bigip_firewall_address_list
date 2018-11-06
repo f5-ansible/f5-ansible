@@ -1,0 +1,23 @@
+- name: Manage address lists on BIG-IP AFM
+  bigip_firewall_address_list:
+      address_lists:         # Simple list of existing address lists to add to this list. Address lists can be specified in either their fully qualified name (/Common/foo) or their short name (foo). If a short name is used, the
+                               `partition' argument will automatically be prepended to the short name.
+      address_ranges:        # A list of address ranges where the range starts with a port number, is followed by a dash (-) and then a second number. If the first address is greater than the second number, the numbers will be
+                               reversed so-as to be properly formatted. ie, `2.2.2.2-1.1.1'. would become `1.1.1.1-2.2.2.2'.
+      addresses:             # Individual addresses that you want to add to the list. These addresses differ from ranges, and lists of lists such as what can be used in `address_ranges' and `address_lists' respectively. This list
+                               can also include networks that have CIDR notation.
+      description:           # Description of the address list
+      fqdns:                 # A list of fully qualified domain names (FQDNs). An FQDN has at least one decimal point in it, separating the host from the domain. To add FQDNs to a list requires that a global FQDN resolver be
+                               configured. At the moment, this must either be done via `bigip_command', or, in the GUI of BIG-IP. If using `bigip_command', this can be done with `tmsh modify security
+                               firewall global-fqdn-policy FOO' where `FOO' is a DNS resolver configured at `tmsh create net dns-resolver FOO'.
+      geo_locations:         # List of geolocations specified by their `country' and `region'.
+      name:                  # (required) Specifies the name of the address list.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the address list and entries exists. When `absent', ensures the address list is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

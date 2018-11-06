@@ -1,0 +1,40 @@
+- name: Manage AFM Firewall rules
+  bigip_firewall_rule:
+      action:                # Specifies the action for the firewall rule. When `accept', allows packets with the specified source, destination, and protocol to pass through the firewall. Packets that match the rule, and are
+                               accepted, traverse the system as if the firewall is not present. When `drop', drops packets with the specified source, destination, and protocol. Dropping a packet is a
+                               silent action with no notification to the source or destination systems. Dropping the packet causes the connection to be retried until the retry threshold is reached.
+                               When `reject', rejects packets with the specified source, destination, and protocol. When a packet is rejected the firewall sends a destination unreachable message to
+                               the sender. When `accept-decisively', allows packets with the specified source, destination, and protocol to pass through the firewall, and does not require any further
+                               processing by any of the further firewalls. Packets that match the rule, and are accepted, traverse the system as if the firewall is not present. If the Rule List is
+                               applied to a virtual server, management IP, or self IP firewall rule, then Accept Decisively is equivalent to Accept. When creating a new rule, if this parameter is not
+                               provided, the default is `reject'.
+      description:           # The rule description.
+      destination:           # Specifies packet destinations to which the rule applies. Leaving this field blank applies the rule to all addresses and all ports. You can specify the following destination items. An IPv4 or IPv6
+                               address, an IPv4 or IPv6 address range, geographic location, VLAN, address list, port, port range, port list or address list. You can specify a mix of different types of
+                               items for the source address.
+      icmp_message:          # Specifies the Internet Control Message Protocol (ICMP) or ICMPv6 message `type' and `code' that the rule uses. This parameter is only relevant when `protocol' is either `icmp'(1) or `icmpv6'(58).
+      irule:                 # Specifies an iRule that is applied to the rule. An iRule can be started when the firewall rule matches traffic.
+      logging:               # Specifies whether logging is enabled or disabled for the firewall rule. When creating a new rule, if this parameter is not specified, the default if `no'.
+      name:                  # (required) Specifies the name of the rule.
+      parent_policy:         # The policy which contains the rule to be managed. One of either `parent_policy' or `parent_rule_list' is required.
+      parent_rule_list:      # The rule list which contains the rule to be managed. One of either `parent_policy' or `parent_rule_list' is required.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      protocol:              # Specifies the protocol to which the rule applies. Protocols may be specified by either their name or numeric value. A special protocol value `any' can be specified to match any protocol. The numeric
+                               equivalent of this protocol is `255'.
+      provider:              # A dict object containing connection details.
+      rule_list:             # Specifies an existing rule list to use in the rule. This parameter is mutually exclusive with many of the other individual-rule specific settings. This includes `logging', `action', `source',
+                               `destination', `irule'', `protocol' and `logging'.
+      schedule:              # Specifies a schedule for the firewall rule. You configure schedules to define days and times when the firewall rule is made active.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      source:                # Specifies packet sources to which the rule applies. Leaving this field blank applies the rule to all addresses and all ports. You can specify the following source items. An IPv4 or IPv6 address, an
+                               IPv4 or IPv6 address range, geographic location, VLAN, address list, port, port range, port list or address list. You can specify a mix of different types of items for
+                               the source address.
+      state:                 # When `state' is `present', ensures that the rule exists. When `state' is `absent', ensures that the rule is removed.
+      status:                # Indicates the activity state of the rule or rule list. When `disabled', specifies that the rule or rule list does not apply at all. When `enabled', specifies that the system applies the firewall rule
+                               or rule list to the given context and addresses. When `scheduled', specifies that the system applies the rule or rule list according to the specified schedule. When
+                               creating a new rule, if this parameter is not provided, the default is `enabled'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

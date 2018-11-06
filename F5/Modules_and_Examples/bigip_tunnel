@@ -1,0 +1,40 @@
+- name: Manage tunnels on a BIG-IP
+  bigip_tunnel:
+      auto_last_hop:         # Allows you to configure auto last hop on a per-tunnel basis. When creating a new tunnel, if this parameter is supported by the tunnel profile but not specified, the default is `default'. When
+                               `default', means that the system uses the global auto-lasthop setting to send back the request. When `enabled', allows the system to send return traffic to the MAC
+                               address that transmitted the request, even if the routing table points to a different network or interface. As a result, the system can send return traffic to clients
+                               even when there is no matching route.
+      description:           # Description of the tunnel.
+      key:                   # When applied to a GRE tunnel, this value specifies an optional field in the GRE header, used to authenticate the source of the packet. When applied to a VXLAN or Geneve tunnel, this value specifies
+                               the Virtual Network Identifier (VNI). When applied to an NVGRE tunnel, this value specifies the Virtual Subnet Identifier (VSID). When creating a new tunnel, if this
+                               parameter is supported by the tunnel profile but not specified, the default value is `0'.
+      local_address:         # Specifies the IP address of the local endpoint of the tunnel.
+      mode:                  # Specifies how the tunnel carries traffic. When creating a new tunnel, if this parameter is supported by the tunnel profile but not specified, the default is `bidirectional'. When `bidirectional',
+                               specifies that the tunnel carries both inbound and outbound traffic. When `inbound', specifies that the tunnel carries only incoming traffic. When `outbound', specifies
+                               that the tunnel carries only outgoing traffic.
+      mtu:                   # Specifies the maximum transmission unit (MTU) of the tunnel. When creating a new tunnel, if this parameter is supported by the tunnel profile but not specified, the default value is `0'. The valid
+                               range is from `0' to `65515'.
+      name:                  # (required) Specifies the name of the tunnel.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      profile:               # Specifies the profile to associate with the tunnel for handling traffic. Depending on your selection, other settings become available or disappear. This parameter may not be changed after it is set.
+      provider:              # A dict object containing connection details.
+      remote_address:        # Specifies the IP address of the remote endpoint of the tunnel. For `dslite', `fec' (when configuring the FEC tunnel for receiving traffic only), `v6rd' (configured as a border relay), or `map', the
+                               tunnel must have an unspecified remote address (any).
+      secondary_address:     # Specifies a non-floating IP address for the tunnel, to be used with host-initiated traffic.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the tunnel exists. When `absent', ensures the tunnel is removed.
+      tos:                   # Specifies the Type of Service (TOS) value to insert in the encapsulating header of transmitted packets. When creating a new tunnel, if this parameter is supported by the tunnel profile but not
+                               specified, the default value is `preserve'. When `preserve', the system copies the TOS value from the inner header to the outer header. You may also specify a numeric
+                               value. The possible values are from `0' to `255'.
+      traffic_group:         # Specifies the traffic group to associate with the tunnel. This value cannot be changed after it is set. This is a limitation of BIG-IP.
+      transparent:           # Specifies that the tunnel operates in transparent mode. When `yes', you can inspect and manipulate the encapsulated traffic flowing through the BIG-IP system. A transparent tunnel terminates a tunnel
+                               while presenting the illusion that the tunnel transits the device unmodified (that is, the BIG-IP system appears as if it were an intermediate router that simply routes
+                               IP traffic through the device).
+      use_pmtu:              # Enables or disables the tunnel to use the PMTU (Path MTU) information provided by ICMP NeedFrag error messages. If `yes' and the tunnel `mtu' is set to `0', the tunnel will use the PMTU information.
+                               If `yes' and the tunnel `mtu' is fixed to a non-zero value, the tunnel will use the minimum of PMTU and MTU. If `no', the tunnel will use fixed MTU or calculate its MTU
+                               using tunnel encapsulation configurations.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

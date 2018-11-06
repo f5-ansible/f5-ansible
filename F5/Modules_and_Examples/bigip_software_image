@@ -1,0 +1,20 @@
+- name: Manage software images on a BIG-IP
+  bigip_software_image:
+      force:                 # When `yes', will upload the file every time and replace the file on the device. When `no', the file will only be uploaded if it does not already exist. Generally should be `yes' only in cases where
+                               you have reason to believe that the image was corrupted during upload.
+      image:                 # The image to put on the remote device. This may be an absolute or relative location on the Ansible controller. Image names, whether they are base ISOs or hotfix ISOs, *must* be unique.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the image is uploaded. When `absent', ensures that the image is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Manage software images by Dylan
+  bigip_software_image:
+    force: no
+    image: /Users/huaiqingcheng/Desktop/F5/Images/Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso

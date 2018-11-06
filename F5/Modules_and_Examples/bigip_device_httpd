@@ -1,0 +1,78 @@
+- name: Manage HTTPD related settings on BIG-IP
+  bigip_device_httpd:
+      allow:                 # Specifies, if you have enabled HTTPD access, the IP address or address range for other systems that can communicate with this system. To specify all addresses, use the value `all'. IP address can be
+                               specified, such as 172.27.1.10. IP rangees can be specified, such as 172.27.*.* or 172.27.0.0/255.255.0.0.
+      auth_name:             # Sets the BIG-IP authentication realm name.
+      auth_pam_dashboard_timeout:   # Sets whether or not the BIG-IP dashboard will timeout.
+      auth_pam_idle_timeout:   # Sets the GUI timeout for automatic logout, in seconds.
+      auth_pam_validate_ip:   # Sets the authPamValidateIp setting.
+      fast_cgi_timeout:      # Sets the timeout of FastCGI.
+      hostname_lookup:       # Sets whether or not to display the hostname, if possible.
+      log_level:             # Sets the minimum httpd log level.
+      max_clients:           # Sets the maximum number of clients that can connect to the GUI at once.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      redirect_http_to_https:   # Whether or not to redirect http requests to the GUI to https.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      ssl_cipher_suite:      # Specifies the ciphers that the system uses. The values in the suite are separated by colons (:). Can be specified in either a string or list form. The list form is the recommended way to provide the
+                               cipher suite. See examples for usage. Use the value `default' to set the cipher suite to the system default. This value is equivalent to specifying a list of `ECDHE-RSA-
+                               AES128-GCM-SHA256, ECDHE-RSA-AES256-GCM-SHA384,ECDHE-RSA-AES128-SHA,ECDHE-RSA-AES256-SHA, ECDHE-RSA-AES128-SHA256,ECDHE-RSA-AES256-SHA384,ECDHE-ECDSA-AES128-GCM-SHA256,
+                               ECDHE-ECDSA-AES256-GCM-SHA384,ECDHE-ECDSA-AES128-SHA,ECDHE-ECDSA-AES256-SHA, ECDHE-ECDSA-AES128-SHA256,ECDHE-ECDSA-AES256-SHA384,AES128-GCM-SHA256, AES256-GCM-
+                               SHA384,AES128-SHA,AES256-SHA,AES128-SHA256,AES256-SHA256, ECDHE-RSA-DES-CBC3-SHA,ECDHE-ECDSA-DES-CBC3-SHA,DES-CBC3-SHA'.
+      ssl_port:              # The HTTPS port to listen on.
+      ssl_protocols:         # The list of SSL protocols to accept on the management console. A space-separated list of tokens in the format accepted by the Apache mod_ssl SSLProtocol directive. Can be specified in either a string
+                               or list form. The list form is the recommended way to provide the cipher suite. See examples for usage. Use the value `default' to set the SSL protocols to the system
+                               default. This value is equivalent to specifying a list of `all,-SSLv2,-SSLv3'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+- name: Set the BIG-IP authentication realm name
+  bigip_device_httpd:
+    auth_name: BIG-IP
+
+
+
+
+
+- name: Set the auth pam timeout to 3600 seconds
+  bigip_device_httpd:
+    auth_pam_idle_timeout: 1200
+
+
+
+
+
+- name: Set the validate IP settings
+  bigip_device_httpd:
+    auth_pam_validate_ip: on
+
+
+
+
+
+- name: Set SSL cipher suite by list
+  bigip_device_httpd:
+    ssl_cipher_suite:
+      - ECDHE-RSA-AES128-GCM-SHA256
+      - ECDHE-RSA-AES256-GCM-SHA384
+      - ECDHE-RSA-AES128-SHA
+      - AES256-SHA256
+
+
+- name: Set SSL cipher suite by string
+  bigip_device_httpd:
+    ssl_cipher_suite: ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:AES256-SHA256
+
+
+- name: Set SSL protocols by list
+  bigip_device_httpd:
+    ssl_protocols:
+      - all
+      - !SSLv2
+      - !SSLv3
+
+
+- name: Set SSL protocols by string
+  bigip_device_httpd:
+    ssl_cipher_suite: all !SSLv2 !SSLv3

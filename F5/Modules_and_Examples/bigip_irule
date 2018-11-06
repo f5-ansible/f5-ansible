@@ -1,0 +1,28 @@
+- name: Manage iRules across different modules on a BIG-IP
+  bigip_irule:
+      content:               # When used instead of 'src', sets the contents of an iRule directly to the specified value. This is for simple values, but can be used with lookup plugins for anything complex or with formatting.
+                               Either one of `src' or `content' must be provided.
+      module:                # (required) The BIG-IP module to add the iRule to.
+      name:                  # (required) The name of the iRule.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      src:                   # (required) The iRule file to interpret and upload to the BIG-IP. Either one of `src' or `content' must be provided.
+      state:                 # Whether the iRule should exist or not.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+Examples:
+
+- name: Create a rule by Dylan
+  bigip_irule:
+    name: rule_from_dylan
+    content: "{{ lookup ('file', '../Files/irules/http_redirect.tcl') }}"
+    module: ltm
+    state: present
+    

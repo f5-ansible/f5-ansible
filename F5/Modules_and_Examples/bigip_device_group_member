@@ -1,0 +1,31 @@
+- name: Manages members in a device group
+  bigip_device_group_member:
+      device_group:          # (required) The device group that you want to add the member to.
+      name:                  # (required) Specifies the name of the device that you want to add to the device group. Often this will be the hostname of the device. This member must be trusted by the device already. Trusting can be
+                               done with the `bigip_device_trust' module and the `peer_hostname' option to that module.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the device group member exists. When `absent', ensures the device group member is removed.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+
+- name: Manages members in a device group
+  bigip_device_group_member:
+    name: www.test.com.cn
+    state: present
+    device_group: sync-failover
+- name: Add the current device to the "device_trust_group" device group
+  bigip_device_group_member:
+    name: "{{ inventory_hostname }}"
+    device_group: device_trust_group
+- name: Add the hosts in the current scope to "device_trust_group"
+  bigip_device_group_member:
+    name: "{{ item }}"
+    device_group: device_trust_group
+  with_items: "{{ hostvars.keys() }}"
+  run_once: true

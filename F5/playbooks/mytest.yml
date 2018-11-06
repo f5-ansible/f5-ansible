@@ -1,0 +1,308 @@
+---
+- name: improt multi ssl certificates
+  hosts: F5
+  connection: local
+  gather_facts: no
+  vars:
+    ssl_rsa_certificates_patch: "../Files/ssl_certificates/rsa_2048"
+  tasks:
+  - name: import ssl keys by Dylan
+    bigip_ssl_key:
+      name: ssl_rsa-2048
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/ca_rsa_2048.key') }}"
+      state: present
+  - name: import ssl certificates by Dylan
+    bigip_ssl_certificate:
+      name: "{{ item.name }}"
+      content: "{{ item.content }}"
+      state: present
+    loop:
+      - { name: 'ssl_rsa-2048', content: "{{ lookup ('file', '{{ ssl_rsa_certificates_patch }}/ca_rsa_2048.crt') }}" }
+      - { name: 'ssl_rsa-2048_chain', content: "{{ lookup ('file', '{{ ssl_rsa_certificates_patch }}/chain.crt') }}" }
+  - name: crete a vlan 333 by Dylan
+    bigip_vlan:
+      name: "{{ item.name }}"
+      tag: "{{ item.tag }}"
+      tagged_interfaces: "{{ item.tagged_interfaces }}"
+    loop:
+    - name: vlan_337
+      tag: 337
+      tagged_interfaces:
+        #- 1.2
+        - 1.3
+   #- { name: 'vlan_338' , tag: '338' , tagged_interfaces: 1.4 }
+  - name: Create a trunk by Dylan
+    bigip_trunk:
+      name: "{{ item.name }}"
+      interfaces: "{{ item.interfaces }}"
+      lacp_enabled: yes
+      lacp_mode: active
+      state: present
+    loop:
+    - name: 'server-trunk'
+      interfaces:
+        - 1.3
+        - 1.4
+    - name: 'client-trunk'
+      interfaces:
+        - 1.1
+        - 1.2
+    ignore_errors: True
+  - name: create a bigip_selfip non-floating by Dylan
+    bigip_selfip:
+      name: "{{ item.name }}"
+      address: "{{ item.address }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan }}"
+      allow_service: all
+      traffic_group: /Common/traffic-group-local-only
+    loop:
+    - name: 33.33.33.33
+      address: 33.33.33.33
+      netmask: 255.255.255.0
+      vlan: vlan_333
+    - name: 33.33.34.33
+      address: 33.33.34.33
+      netmask: 255.255.255.0
+      vlan: vlan_334
+
+  - name: create a bigip_selfip floating by Dylan
+    bigip_selfip:
+      name: "{{ item.name }}"
+      address: "{{ item.address }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan }}"
+      allow_service: all
+      traffic_group: /Common/traffic-group-1
+    loop:
+    - name: 33.33.33.35
+      address: 33.33.33.35
+      netmask: 255.255.255.0
+      vlan: vlan_333
+    - name: 33.33.34.35
+      address: 33.33.34.35
+      netmask: 255.255.255.0
+      vlan: vlan_334
+
+  - name: create a bigip_selfip floating by Dylan
+    bigip_selfip:
+      name: 33.33.33.34
+      address: 33.33.33.34
+      netmask: 255.255.255.0
+      vlan: vlan_333
+      allow_service: all
+      traffic_group: /Common/traffic-group-1
+  - name: crete http monitor by Dylan
+    bigip_monitor_http:
+      name: http_test
+      send: 'GET / HTTP/1.1'
+      receive: 'It works'
+      interval: 5
+      timeout: 16
+      time_until_up: 0
+  - name: create https monitor
+    bigip_monitor_https:
+      name: https_test
+      interval: 5
+      timeout: 16
+      time_until_up: 0
+      send: 'GET / HTTP/1.1'
+      receive: 'It works'
+      state: present
+  - name: create tcp monitor
+    bigip_monitor_tcp:
+      name: tcp_test
+      state: present
+      interval: 5
+      timeout: 16
+      time_until_up: 0
+      ip: '172.16.116.200'
+      port: '443'
+  - name: create tcp_echo monitor
+    bigip_monitor_tcp_echo:
+      name: tcp_echo_test
+      state: present
+      interval: 5
+      timeout: 16
+      time_until_up: 0
+      ip: '172.16.116.200'
+  - name: create tcp_half_open monitor
+    bigip_monitor_tcp_half_open:
+      name: tcp_half_open_test
+      state: present
+      interval: 5
+      timeout: 16
+      time_until_up: 0
+      ip: '172.16.116.200'
+      port: '443'
+  - name: create a partition
+    bigip_partition:
+      name: partiton_test
+      state: present
+      route_domain: 0
+  - name: create Hostname
+    bigip_hostname:
+      hostname: 'www.icbc.com.cn'
+  - name: create management route
+    bigip_management_route:
+      name: mgmt_route_to_ntp
+      network: 172.16.191.0/24
+      gateway: 172.16.191.1
+
+    bigip_management_route:
+        name: default
+        network: default
+        gateway: 172.16.191.1
+        state: present
+  - name: crete ssl profile by Dylan
+    bigip_profile_client_ssl:
+      name: ssl_client_test
+      state: present
+      cert_key_chain:
+        #- key: ssl_rsa_2048
+          #cert: ssl_rsa-2048
+        #  chain: ssl_rsa-2048_chain
+        - { cert: default , key: default , chain: default}
+      ciphers: 'DEFAULT:!TLSv1'
+      options: ''
+  - name: create a http profile by Dylan
+    bigip_profile_http:
+      name: http_redirect
+      state: present
+      proxy_type: reverse
+      redirect_rewrite: all
+  - name: create a http compression profile by Dylan
+    bigip_profile_http_compression:
+      name: http_compression
+      state: present
+      buffer_size: 4096
+      gzip_level:  1
+      gzip_memory_level: 8
+      gzip_window_size: 16
+  - name: create oneconnect profile by Dylan
+    bigip_profile_oneconnect:
+      name: oneconnect_test
+      state: present
+      idle_timeout_override: disabled
+      limit_type: none
+      maximum_age: 86400
+      maximum_reuse: 1000
+      maximum_size: 10000
+      share_pools: yes
+      source_mask: 0.0.0.0
+  - name: create source_addr profile by Dylan
+    bigip_profile_persistence_src_addr:
+      name: persistence_src_addr
+      state: present
+      entry_timeout: 180
+      hash_algorithm: default
+      match_across_pools: yes
+      match_across_services: no
+      match_across_virtuals: no
+      override_connection_limit: yes
+  - name: create tcp profile by Dylan
+    bigip_profile_tcp:
+      name: tcp_1005
+      state: present
+      idle_timeout: 1005
+      time_wait_recycle: yes
+  - name: create upd profile by Dylan
+    bigip_profile_udp:
+      name: upd_1005
+      state: present
+      datagram_load_balancing: no
+      idle_timeout: 1005
+
+#  - name: fetch qkview from f5 by Dylan
+#    bigip_qkview:
+#      asm_request_log: no
+#      complete_information: yes
+#      dest: "/Users/huaiqingcheng/Documents/myansible/F5/Files/qkview/test.qkview"
+  - name: create remote roles
+    bigip_remote_role:
+      name: "{{ item.name }}"
+      state: present
+      assigned_role: "%F5-LTM-User-Role"
+      attribute_string: "{{ item.attribute_string }}"
+      line_order: "{{ item.line_order }}"
+      partition_access: "%F5-LTM-User-Partition"
+      terminal_access: "%F5-LTM-User-Shell"
+      remote_access: yes
+    loop:
+    - name: myrole-read
+      attribute_string: "F5-LTM-User-Info-1=f5read"
+      line_order: 1
+    - name: myrole-write
+      attribute_string: "F5-LTM-User-Info-1=f5write"
+      line_order: 2
+  - name: Manages SNMP v2c communities  by Dylan
+    bigip_snmp_community:
+      community: comm-2
+      name: Dylan_Community
+      state: present
+      version: v2c
+      access: ro
+      ip_version: 4
+      source: default
+      oid: .1
+  - name: Manipulate general SNMP settings by Dylan
+    bigip_snmp:
+      agent_authentication_traps: disabled
+      agent_status_traps: disabled
+      allowed_addresses: ""
+      contact: dylan
+      device_warning_traps: enabled
+      location: BJ
+  - name: Manipulate SNMP trap information
+    bigip_snmp_trap:
+      name: Dylan_Community
+      community: comm-2
+      destination: 172.16.116.200
+      network: management
+      snmp_version: 2c
+  - name: Manage software images by Dylan
+    bigip_software_image:
+      force: no
+      image: /Users/huaiqingcheng/Desktop/F5/Images/Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso
+  - name: Install software images by Dylan
+    bigip_software_install:
+      image: Hotfix-BIGIP-11.5.4.4.0.313-HF4.iso
+      state: installed
+      volume: HD1.1
+  - name: Manage the software update settings of a BIG-IP
+    bigip_software_update:
+      auto_check: no
+      auto_phone_home: no
+      frequency: weekly
+  - name: Manipulate static routes on a BIG-IP
+    bigip_static_route:
+      name: default
+      destination: 0.0.0.0
+      netmask: 0.0.0.0
+      gateway_address: 172.16.116.1
+      mtu: 1500
+      route_domain: 0
+  - name: Manage BIG-IP system database variables
+    bigip_sys_db:
+      state: present
+      key: acceleration.log.level
+      value: show_name
+  - name: Manage BIG-IP global settings
+    bigip_sys_global:
+      banner_text: 'This box is deployed by Dylan'
+      console_timeout: 500
+      gui_setup: no
+      lcd_display: no
+      mgmt_dhcp: no
+      net_reboot: no
+      quiet_boot: no
+      security_banner: yes
+  - name: Manages traffic groups on BIG-IP
+    bigip_traffic_group:
+      name: traffic-group-2
+      state: present
+      mac_address: ""
+ - name: Fetches a UCS file from remote nodes
+    bigip_ucs_fetch:
+      src: cs_backup.ucs
+      dest: /tmp/cs_backup.ucs

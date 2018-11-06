@@ -1,0 +1,44 @@
+- name: Manages vCMP guests on a BIG-IP
+  bigip_vcmp_guest:
+      allowed_slots:         # Contains those slots that the guest is allowed to be assigned to. When the host determines which slots this guest should be assigned to, only slots in this list will be considered. This is a good way
+                               to force guests to be assigned only to particular slots, or, by configuring disjoint `allowed_slots' on two guests, that those guests are never assigned to the same
+                               slot. By default this list includes every available slot in the cluster. This means, by default, the guest may be assigned to any slot.
+      cores_per_slot:        # Specifies the number of cores that the system allocates to the guest. Each core represents a portion of CPU and memory. Therefore, the amount of memory allocated per core is directly tied to the
+                               amount of CPU. This amount of memory varies per hardware platform type. The number you can specify depends on the type of hardware you have. In the event of a reboot,
+                               the system persists the guest to the same slot on which it ran prior to the reboot.
+      delete_virtual_disk:   # When `state' is `absent', will additionally delete the virtual disk associated with the vCMP guest. By default, this value is `no'.
+      initial_image:         # Specifies the base software release ISO image file for installing the TMOS hypervisor instance and any licensed BIG-IP modules onto the guest's virtual disk. When creating a new guest, this parameter
+                               is required.
+      mgmt_address:          # Specifies the IP address, and subnet or subnet mask that you use to access the guest when you want to manage a module running within the guest. This parameter is required if the `mgmt_network'
+                               parameter is `bridged'. When creating a new guest, if you do not specify a network or network mask, a default of `/24' (`255.255.255.0') will be assumed.
+      mgmt_network:          # Specifies the method by which the management address is used in the vCMP guest. When `bridged', specifies that the guest can communicate with the vCMP host's management network. When `isolated',
+                               specifies that the guest is isolated from the vCMP host's management network. In this case, the only way that a guest can communicate with the vCMP host is through the
+                               console port or through a self IP address on the guest that allows traffic through port 22. When `host only', prevents the guest from installing images and hotfixes
+                               other than those provided by the hypervisor. If the guest setting is `isolated' or `host only', the `mgmt_address' does not apply. Concerning mode changing, changing
+                               `bridged' to `isolated' causes the vCMP host to remove all of the guest's management interfaces from its bridged management network. This immediately disconnects the
+                               guest's VMs from the physical management network. Changing `isolated' to `bridged' causes the vCMP host to dynamically add the guest's management interfaces to the
+                               bridged management network. This immediately connects all of the guest's VMs to the physical management network. Changing this property while the guest is in the
+                               `configured' or `provisioned' state has no immediate effect.
+      mgmt_route:            # Specifies the gateway address for the `mgmt_address'. If this value is not specified when creating a new guest, it is set to `none'. The value `none' can be used during an update to remove this value.
+      min_number_of_slots:   # Specifies the minimum number of slots that the guest must be assigned to in order to deploy. This field dictates the number of slots that the guest must be assigned to. If at the end of any allocation
+                               attempt the guest is not assigned to at least this many slots, the attempt fails and the change that initiated it is reverted. A guest's `min_number_of_slots' value
+                               cannot be greater than its `number_of_slots'.
+      name:                  # (required) The name of the vCMP guest to manage.
+      number_of_slots:       # Specifies the number of slots for the system to use for creating the guest. This value dictates how many cores a guest is allocated from each slot that it is assigned to. Possible values are dependent
+                               on the type of blades being used in this cluster. The default value depends on the type of blades being used in this cluster.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the vCMP guest on the system. Each state implies the actions of all states before it. When `configured', guarantees that the vCMP guest exists with the provided attributes. Additionally,
+                               ensures that the vCMP guest is turned off. When `disabled', behaves the same as `configured' the name of this state is just a convenience for the user that is more
+                               understandable. When `provisioned', will ensure that the guest is created and installed. This state will not start the guest; use `deployed' for that. This state is one
+                               step beyond `present' as `present' will not install the guest; only setup the configuration for it to be installed. When `present', ensures the guest is properly
+                               provisioned and starts the guest so that it is in a running state. When `absent', removes the vCMP from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      vlans:                 # VLANs that the guest uses to communicate with other guests, the host, and with the external network. The available VLANs in the list are those that are currently configured on the vCMP host. The order
+                               of these VLANs is not important; in fact, it's ignored. This module will order the VLANs for you automatically. Therefore, if you deliberately re-order them in
+                               subsequent tasks, you will find that this module will *not* register a change.

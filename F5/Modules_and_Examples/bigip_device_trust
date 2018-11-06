@@ -1,0 +1,28 @@
+- name: Manage the trust relationships between BIG-IPs
+  bigip_device_trust:
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      peer_hostname:         # The hostname that you want to associate with the device. This value will be used to easily distinguish this device in BIG-IP configuration. When trusting a new device, if this parameter is not
+                               specified, the value of `peer_server' will be used as a default.
+      peer_password:         # The password of the API username of the remote peer device that you are trusting. If this value is not specified, then the value of `password', or the environment variable `F5_PASSWORD' will be used.
+      peer_server:           # (required) The peer address to connect to and trust for synchronizing configuration. This is typically the management address of the remote device, but may also be a Self IP.
+      peer_user:             # The API username of the remote peer device that you are trusting. Note that the CLI user cannot be used unless it too has an API account. If this value is not specified, then the value of `user', or
+                               the environment variable `F5_USER' will be used.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures the specified devices are trusted. When `absent', removes the device trusts.
+      type:                  # Specifies whether the device you are adding is a Peer or a Subordinate. The default is `peer'. The difference between the two is a matter of mitigating risk of compromise. A subordinate device cannot
+                               sign a certificate for another device. In the case where the security of an authority device in a trust domain is compromised, the risk of compromise is minimized for
+                               any subordinate device. Designating devices as subordinate devices is recommended for device groups with a large number of member devices, where the risk of compromise
+                               is high.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Add trusts for all peer devices to Active device
+  bigip_device_trust:
+    peer_server: 192.168.1.246
+    peer_hostname: www.test2.com.cn
+    peer_user: admin
+    peer_password: admin

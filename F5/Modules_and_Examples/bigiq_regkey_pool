@@ -1,0 +1,13 @@
+- name: Manages registration key pools on BIG-IQ
+  bigiq_regkey_pool:
+      description:           # A description to attach to the pool.
+      name:                  # (required) Specifies the name of the registration key pool. You must be mindful to name your registration pools unique names. While BIG-IQ does not require this, this module does. If you do not do
+                               this, the behavior of the module is undefined and you may end up putting licenses in the wrong registration key pool.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # The state of the regkey pool on the system. When `present', guarantees that the pool exists. When `absent', removes the pool, and the licenses it contains, from the system.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.

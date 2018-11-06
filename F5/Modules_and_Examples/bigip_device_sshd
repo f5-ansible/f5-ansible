@@ -1,0 +1,25 @@
+- name: Manage the SSHD settings of a BIG-IP
+  bigip_device_sshd:
+      allow:                 # Specifies, if you have enabled SSH access, the IP address or address range for other systems that can use SSH to communicate with this system. To specify all addresses, use the value `all'. IP address
+                               can be specified, such as 172.27.1.10. IP rangees can be specified, such as 172.27.*.* or 172.27.0.0/255.255.0.0.
+      banner:                # Whether to enable the banner or not.
+      banner_text:           # Specifies the text to include on the pre-login banner that displays when a user attempts to login to the system using SSH.
+      inactivity_timeout:    # Specifies the number of seconds before inactivity causes an SSH session to log out.
+      log_level:             # Specifies the minimum SSHD message level to include in the system log.
+      login:                 # Specifies, when checked `enabled', that the system accepts SSH communications.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port:                  # Port that you want the SSH daemon to run on.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Set the banner for the SSHD service from a string
+  bigip_device_sshd:
+    banner: enabled
+    banner_text: you know what you are doing ?
+    inactivity_timeout: 600
+    login: enabled

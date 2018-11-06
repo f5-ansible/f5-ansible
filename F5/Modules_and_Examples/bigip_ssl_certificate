@@ -1,0 +1,37 @@
+- name: Import/Delete certificates from BIG-IP
+  bigip_ssl_certificate:
+      content:               # Sets the contents of a certificate directly to the specified value. This is used with lookup plugins or for anything with formatting or `content' must be provided when `state' is `present'.
+      issuer_cert:           # Issuer certificate used for OCSP monitoring. This parameter is only valid on versions of BIG-IP 13.0.0 or above.
+      name:                  # (required) SSL Certificate Name. This is the cert name used when importing a certificate into the F5. It also determines the filenames of the objects on the LTM.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Certificate state. This determines if the provided certificate and key is to be made `present' on the device or `absent'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+Exapmles:
+---
+- name: improt multi ssl certificates
+  hosts: F5
+  connection: local
+  gather_facts: no
+  vars:
+    ssl_rsa_certificates_patch: "../Files/ssl_certificates/rsa_2048"
+  tasks:
+  - name: import ssl keys by Dylan
+    bigip_ssl_key:
+      name: ssl_rsa-2048
+      content: "{{ lookup ('file', '../Files/ssl_certificates/rsa_2048/ca_rsa_2048.key') }}"
+      state: present
+  - name: import ssl certificates by Dylan
+    bigip_ssl_certificate:
+      name: "{{ item.name }}"
+      content: "{{ item.content }}"
+      state: present
+    loop:
+      - { name: 'ssl_rsa-2048', content: "{{ lookup ('file', '{{ ssl_rsa_certificates_patch }}/ca_rsa_2048.crt') }}" }
+      - { name: 'ssl_rsa-2048_chain', content: "{{ lookup ('file', '{{ ssl_rsa_certificates_patch }}/chain.crt') }}" }

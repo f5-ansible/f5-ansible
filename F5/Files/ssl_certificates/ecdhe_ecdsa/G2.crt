@@ -1,0 +1,46 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 7 (0x7)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=Beijing, O=G3, OU=CA, CN=www.G3.com
+        Validity
+            Not Before: Apr 14 06:41:06 2018 GMT
+            Not After : Apr 11 06:41:06 2028 GMT
+        Subject: C=CN, ST=Beijing, O=G2, OU=CA, CN=www.G2.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub: 
+                    04:13:a6:91:f9:4e:9a:75:e5:db:28:82:8f:95:c6:
+                    18:f0:9e:4b:dc:38:58:49:37:a5:16:ee:7c:64:b9:
+                    86:5c:0e:56:15:05:f4:2b:4f:af:e1:f8:bf:b7:f9:
+                    ee:a5:15:6d:9b:8d:31:0e:99:6d:92:11:e8:01:dc:
+                    90:e0:46:65:83
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                CF:72:FA:34:E0:70:7C:6A:E5:21:B2:83:22:72:52:F3:92:F2:2D:80
+            X509v3 Authority Key Identifier: 
+                keyid:51:85:34:23:FB:90:99:1A:85:E0:2E:84:9B:35:70:49:6A:B4:08:10
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+         30:45:02:20:24:b3:51:70:04:bd:24:22:a7:28:0c:71:ce:8a:
+         e9:22:21:d2:d1:ac:6e:fe:af:d8:e7:73:8a:a0:18:a1:d2:64:
+         02:21:00:fb:37:66:67:9a:da:7e:b4:a9:23:c9:70:36:e1:d7:
+         a2:20:0c:63:fb:25:bc:b5:4e:c0:e7:4d:68:f8:cb:56:0f
+-----BEGIN CERTIFICATE-----
+MIIB2zCCAYGgAwIBAgIBBzAKBggqhkjOPQQDAjBOMQswCQYDVQQGEwJDTjEQMA4G
+A1UECAwHQmVpamluZzELMAkGA1UECgwCRzMxCzAJBgNVBAsMAkNBMRMwEQYDVQQD
+DAp3d3cuRzMuY29tMB4XDTE4MDQxNDA2NDEwNloXDTI4MDQxMTA2NDEwNlowTjEL
+MAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxCzAJBgNVBAoMAkcyMQswCQYD
+VQQLDAJDQTETMBEGA1UEAwwKd3d3LkcyLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+AwEHA0IABBOmkflOmnXl2yiCj5XGGPCeS9w4WEk3pRbufGS5hlwOVhUF9CtPr+H4
+v7f57qUVbZuNMQ6ZbZIR6AHckOBGZYOjUDBOMB0GA1UdDgQWBBTPcvo04HB8auUh
+soMiclLzkvItgDAfBgNVHSMEGDAWgBRRhTQj+5CZGoXgLoSbNXBJarQIEDAMBgNV
+HRMEBTADAQH/MAoGCCqGSM49BAMCA0gAMEUCICSzUXAEvSQipygMcc6K6SIh0tGs
+bv6v2OdziqAYodJkAiEA+zdmZ5rafrSpI8lwNuHXoiAMY/slvLVOwOdNaPjLVg8=
+-----END CERTIFICATE-----

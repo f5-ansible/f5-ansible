@@ -1,0 +1,32 @@
+- name: Manages external GTM monitors on a BIG-IP
+  bigip_gtm_monitor_external:
+      arguments:             # Specifies any command-line arguments that the script requires.
+      external_program:      # Specifies the name of the file for the monitor to use. In order to reference a file, you must first import it using options on the System > File Management > External Monitor Program File List >
+                               Import screen. The BIG-IP system automatically places the file in the proper location on the file system.
+      interval:              # The interval specifying how frequently the monitor instance of this template will run. If this parameter is not provided when creating a new monitor, then the default value will be 30. This value
+                               *must* be less than the `timeout' value.
+      ip:                    # IP address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'.
+      name:                  # (required) Specifies the name of the monitor.
+      parent:                # The parent template of this monitor template. Once this value has been set, it cannot be changed. By default, this value is the `http' parent on the `Common' partition.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      port:                  # Port address part of the IP/port definition. If this parameter is not provided when creating a new monitor, then the default value will be '*'. Note that if specifying an IP address, a value between 1
+                               and 65535 must be specified.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # When `present', ensures that the monitor exists. When `absent', ensures the monitor is removed.
+      timeout:               # The number of seconds in which the node or service must respond to the monitor request. If the target responds within the set time period, it is considered up. If the target does not respond within
+                               the set time period, it is considered down. You can change this number to any number you want, however, it should be 3 times the interval number of seconds plus 1
+                               second. If this parameter is not provided when creating a new monitor, then the default value will be 120.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      variables:             # Specifies any variables that the script requires. Note that double quotes in values will be suppressed.
+
+
+
+- name: Create an external monitor
+  bigip_gtm_monitor_external:
+    name: gtm_monitor_external
+    state: present

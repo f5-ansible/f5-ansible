@@ -1,0 +1,28 @@
+- name: Manage GTM pool member settings
+  bigip_gtm_pool_member:
+      description:           # The description of the pool member.
+      limits:                # Specifies resource thresholds or limit requirements at the pool member level. When you enable one or more limit settings, the system then uses that data to take members in and out of service. You can
+                               define limits for any or all of the limit settings. However, when a member does not meet the resource threshold limit requirement, the system marks the member as
+                               unavailable and directs load-balancing traffic to another resource.
+      member_order:          # Specifies the order in which the member will appear in the pool. The system uses this number with load balancing methods that involve prioritizing pool members, such as the Ratio load balancing
+                               method. When creating a new member using this module, if the `member_order' parameter is not specified, it will default to `0' (first member in the pool).
+      monitor:               # Specifies the monitor assigned to this pool member. Pool members only support a single monitor. If the `port' of the `gtm_virtual_server' is `*', the accepted values of this parameter will be
+                               affected. When creating a new pool member, if this parameter is not specified, the default of `default' will be used. To remove the monitor from the pool member, use the
+                               value `none'. For pool members created on different partitions, you can also specify the full path to the Common monitor. For example, `/Common/tcp'.
+      partition:             # Device partition to manage resources on.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      pool:                  # (required) Name of the GTM pool.
+      provider:              # A dict object containing connection details.
+      ratio:                 # Specifies the weight of the pool member for load balancing purposes.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_name:           # (required) Specifies the GTM server which contains the `virtual_server'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      state:                 # Pool member state. When `present', ensures that the pool member is created and enabled. When `absent', ensures that the pool member is removed from the system. When `enabled' or `disabled', ensures
+                               that the pool member is enabled or disabled (respectively) on the remote device. It is recommended that you use the `members' parameter of the `bigip_gtm_pool' module
+                               when adding and removing members and it provides an easier way of specifying order. If this is not possible, then the `state' parameter here should be used. Remember
+                               that the order of the members will be affected if you add or remove them using this method. To some extent, this can be controlled using the `member_order' parameter.
+      type:                  # (required) The type of GTM pool that the member is in.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+      virtual_server:        # (required) Specifies the name of the GTM virtual server which is assigned to the specified `server'.

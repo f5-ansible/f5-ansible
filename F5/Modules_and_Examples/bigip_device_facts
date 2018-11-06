@@ -1,0 +1,29 @@
+- name: Collect facts from F5 BIG-IP devices
+  bigip_device_facts:
+      gather_subset:         # (required) When supplied, this argument will restrict the facts returned to a given subset. Can specify a list of values to include a larger subset. Values can also be used with an initial `!' to
+                               specify that a specific subset should not be collected.
+      password:              # (required) The password for the user account used to connect to the BIG-IP. You may omit this option by setting the environment variable `F5_PASSWORD'.
+      provider:              # A dict object containing connection details.
+      server:                # (required) The BIG-IP host. You may omit this option by setting the environment variable `F5_SERVER'.
+      server_port:           # The BIG-IP server port. You may omit this option by setting the environment variable `F5_SERVER_PORT'.
+      user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
+      validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
+                               `F5_VALIDATE_CERTS'.
+
+
+- name: Collect BIG-IP facts
+  bigip_device_facts:
+    gather_subset:
+      - interfaces
+      - vlans
+
+- name: Collect all BIG-IP facts
+  bigip_device_facts:
+    gather_subset:
+      - all
+
+- name: Collect all BIG-IP facts except trunks
+  bigip_device_facts:
+    gather_subset:
+      - all
+      - "!trunks"

@@ -1,0 +1,5 @@
+---
+
+vlan_name: vlan_24
+vlan_tag: 24
+vlan_tagged_interfaces: 1.3
