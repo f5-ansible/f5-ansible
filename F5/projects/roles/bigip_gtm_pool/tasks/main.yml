@@ -1,0 +1,9 @@
+- name: Get pool facts
+  bigip_gtm_facts:
+    include: "{{ bigip_gtm_facts.include }}"
+    filter: "{{ bigip_gtm_facts.filter }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"

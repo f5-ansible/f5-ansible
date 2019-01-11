@@ -1,0 +1,3 @@
+bigip_gtm_facts:
+  include: pool
+  filter: my_pool

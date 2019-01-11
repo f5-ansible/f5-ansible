@@ -1,0 +1,152 @@
+-----BEGIN CERTIFICATE-----
+MIICBzCCAa2gAwIBAgIJAK+0j0JjokGHMAoGCCqGSM49BAMCMGAxCzAJBgNVBAYT
+AkNOMRAwDgYDVQQIDAdCZWlqaW5nMRAwDgYDVQQHDAdCZWlqaW5nMQswCQYDVQQK
+DAJHNTELMAkGA1UECwwCQ0ExEzARBgNVBAMMCnd3dy5HNS5jb20wHhcNMTgxMTA3
+MDIwNjQ1WhcNMTgxMjA3MDIwNjQ1WjBgMQswCQYDVQQGEwJDTjEQMA4GA1UECAwH
+QmVpamluZzEQMA4GA1UEBwwHQmVpamluZzELMAkGA1UECgwCRzUxCzAJBgNVBAsM
+AkNBMRMwEQYDVQQDDAp3d3cuRzUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcD
+QgAEsB1eD8z+0HME5AjHHc6Kkn6wS8MLelZ6sDGBbBuyccLs60QMuPdkORecirna
+F/afpTzCyD8Y43lhXlptsimJPKNQME4wHQYDVR0OBBYEFArwM+k0LDJKk+2LkpbL
+fCPTWWW3MB8GA1UdIwQYMBaAFArwM+k0LDJKk+2LkpbLfCPTWWW3MAwGA1UdEwQF
+MAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgYnYNl8UOgWu8C02XOAnhxuA2UnShodbh
+glvMhY5dJ5MCIQCCmW6T1UwkjIyzSKdwB9z6ZrNcRT1Yj+kU2IJuFH7+YA==
+-----END CERTIFICATE-----
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 9 (0x9)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=Beijing, L=Beijing, O=G5, OU=CA, CN=www.G5.com
+        Validity
+            Not Before: Nov  7 02:06:50 2018 GMT
+            Not After : Nov  4 02:06:50 2028 GMT
+        Subject: C=CN, ST=Beijing, O=G4, OU=CA, CN=www.G4.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub: 
+                    04:cd:33:d2:02:24:6d:cc:5c:ac:a7:61:bf:c7:34:
+                    51:09:4f:8f:33:01:af:68:cd:95:28:2e:21:c8:1c:
+                    ec:ec:fc:0b:f7:0a:d2:18:b5:c5:3a:97:36:12:6f:
+                    30:22:01:bd:ee:66:59:da:88:16:5d:8f:7f:08:46:
+                    28:14:aa:98:b8
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                9C:AA:ED:D0:D5:5F:1F:E5:9A:37:A2:8E:53:26:48:80:85:73:70:56
+            X509v3 Authority Key Identifier: 
+                keyid:0A:F0:33:E9:34:2C:32:4A:93:ED:8B:92:96:CB:7C:23:D3:59:65:B7
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+         30:46:02:21:00:f8:f4:61:fa:ee:b0:da:45:95:f1:f2:80:84:
+         a1:ee:2e:d8:af:69:60:ef:ce:00:89:fd:d0:81:c1:30:83:18:
+         ca:02:21:00:bf:6c:f2:e9:e1:60:24:07:71:cb:e0:98:3b:d2:
+         ab:bc:d7:95:f5:8d:8a:af:45:fd:2b:9b:e3:6d:01:f0:c6:97
+-----BEGIN CERTIFICATE-----
+MIIB7jCCAZOgAwIBAgIBCTAKBggqhkjOPQQDAjBgMQswCQYDVQQGEwJDTjEQMA4G
+A1UECAwHQmVpamluZzEQMA4GA1UEBwwHQmVpamluZzELMAkGA1UECgwCRzUxCzAJ
+BgNVBAsMAkNBMRMwEQYDVQQDDAp3d3cuRzUuY29tMB4XDTE4MTEwNzAyMDY1MFoX
+DTI4MTEwNDAyMDY1MFowTjELMAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcx
+CzAJBgNVBAoMAkc0MQswCQYDVQQLDAJDQTETMBEGA1UEAwwKd3d3Lkc0LmNvbTBZ
+MBMGByqGSM49AgEGCCqGSM49AwEHA0IABM0z0gIkbcxcrKdhv8c0UQlPjzMBr2jN
+lSguIcgc7Oz8C/cK0hi1xTqXNhJvMCIBve5mWdqIFl2PfwhGKBSqmLijUDBOMB0G
+A1UdDgQWBBScqu3Q1V8f5Zo3oo5TJkiAhXNwVjAfBgNVHSMEGDAWgBQK8DPpNCwy
+SpPti5KWy3wj01lltzAMBgNVHRMEBTADAQH/MAoGCCqGSM49BAMCA0kAMEYCIQD4
+9GH67rDaRZXx8oCEoe4u2K9pYO/OAIn90IHBMIMYygIhAL9s8unhYCQHccvgmDvS
+q7zXlfWNiq9F/Sub420B8MaX
+-----END CERTIFICATE-----
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 10 (0xa)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=Beijing, O=G4, OU=CA, CN=www.G4.com
+        Validity
+            Not Before: Nov  7 02:06:57 2018 GMT
+            Not After : Nov  4 02:06:57 2028 GMT
+        Subject: C=CN, ST=Beijing, O=G4, OU=CA, CN=www.G3.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub: 
+                    04:13:35:2b:ae:af:83:db:f2:5a:7b:99:a4:bb:9f:
+                    30:3f:38:17:01:64:4d:b5:fa:1c:00:32:7e:03:27:
+                    09:54:28:a0:7d:29:61:c7:66:86:f8:c8:ae:89:88:
+                    75:e1:45:5d:16:cc:18:82:a9:56:b1:b0:21:02:1a:
+                    b5:5e:e1:7d:68
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                B5:1C:69:15:3D:6F:8B:ED:D1:3E:06:32:54:FB:92:0A:AB:F0:E8:53
+            X509v3 Authority Key Identifier: 
+                keyid:9C:AA:ED:D0:D5:5F:1F:E5:9A:37:A2:8E:53:26:48:80:85:73:70:56
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+         30:45:02:20:55:dc:90:7a:c6:a5:82:0f:0a:03:bc:8e:41:d7:
+         1b:20:af:06:94:88:14:a4:47:91:b3:da:bd:2a:07:23:4a:94:
+         02:21:00:aa:12:1e:ee:b5:06:99:b2:30:e7:45:7c:ae:8b:d8:
+         ae:85:00:e1:cf:16:33:b1:5b:28:8e:26:54:8e:c4:ec:41
+-----BEGIN CERTIFICATE-----
+MIIB2zCCAYGgAwIBAgIBCjAKBggqhkjOPQQDAjBOMQswCQYDVQQGEwJDTjEQMA4G
+A1UECAwHQmVpamluZzELMAkGA1UECgwCRzQxCzAJBgNVBAsMAkNBMRMwEQYDVQQD
+DAp3d3cuRzQuY29tMB4XDTE4MTEwNzAyMDY1N1oXDTI4MTEwNDAyMDY1N1owTjEL
+MAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxCzAJBgNVBAoMAkc0MQswCQYD
+VQQLDAJDQTETMBEGA1UEAwwKd3d3LkczLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+AwEHA0IABBM1K66vg9vyWnuZpLufMD84FwFkTbX6HAAyfgMnCVQooH0pYcdmhvjI
+romIdeFFXRbMGIKpVrGwIQIatV7hfWijUDBOMB0GA1UdDgQWBBS1HGkVPW+L7dE+
+BjJU+5IKq/DoUzAfBgNVHSMEGDAWgBScqu3Q1V8f5Zo3oo5TJkiAhXNwVjAMBgNV
+HRMEBTADAQH/MAoGCCqGSM49BAMCA0gAMEUCIFXckHrGpYIPCgO8jkHXGyCvBpSI
+FKRHkbPavSoHI0qUAiEAqhIe7rUGmbIw50V8rovYroUA4c8WM7FbKI4mVI7E7EE=
+-----END CERTIFICATE-----
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 11 (0xb)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=Beijing, O=G4, OU=CA, CN=www.G3.com
+        Validity
+            Not Before: Nov  7 02:07:06 2018 GMT
+            Not After : Nov  4 02:07:06 2028 GMT
+        Subject: C=CN, ST=Beijing, O=G4, OU=CA, CN=www.G2.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub: 
+                    04:55:a7:1f:d9:ab:12:17:a9:d9:1e:69:fe:2c:20:
+                    37:35:06:b8:92:aa:65:5e:68:ba:e3:16:29:4e:e0:
+                    23:10:93:e4:24:c9:bc:4d:92:49:9b:f1:89:60:ca:
+                    c5:a6:a2:8b:12:eb:4b:68:f4:82:7b:c5:90:fa:04:
+                    c7:be:fe:0f:43
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                49:EE:7E:AC:81:10:32:14:39:47:56:E1:03:3E:C8:CC:C4:5C:8C:2E
+            X509v3 Authority Key Identifier: 
+                keyid:B5:1C:69:15:3D:6F:8B:ED:D1:3E:06:32:54:FB:92:0A:AB:F0:E8:53
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+         30:46:02:21:00:fc:da:a8:93:4d:64:16:bd:90:d6:f7:35:69:
+         05:5d:dc:ea:43:d1:b4:a8:61:a6:df:98:10:07:93:a2:bb:9d:
+         3b:02:21:00:fc:f8:3f:36:66:c3:67:56:f6:96:82:50:79:a2:
+         9b:4d:32:55:fe:13:03:1a:a9:3e:3a:22:8f:70:1d:62:32:91
+-----BEGIN CERTIFICATE-----
+MIIB3DCCAYGgAwIBAgIBCzAKBggqhkjOPQQDAjBOMQswCQYDVQQGEwJDTjEQMA4G
+A1UECAwHQmVpamluZzELMAkGA1UECgwCRzQxCzAJBgNVBAsMAkNBMRMwEQYDVQQD
+DAp3d3cuRzMuY29tMB4XDTE4MTEwNzAyMDcwNloXDTI4MTEwNDAyMDcwNlowTjEL
+MAkGA1UEBhMCQ04xEDAOBgNVBAgMB0JlaWppbmcxCzAJBgNVBAoMAkc0MQswCQYD
+VQQLDAJDQTETMBEGA1UEAwwKd3d3LkcyLmNvbTBZMBMGByqGSM49AgEGCCqGSM49
+AwEHA0IABFWnH9mrEhep2R5p/iwgNzUGuJKqZV5ouuMWKU7gIxCT5CTJvE2SSZvx
+iWDKxaaiixLrS2j0gnvFkPoEx77+D0OjUDBOMB0GA1UdDgQWBBRJ7n6sgRAyFDlH
+VuEDPsjMxFyMLjAfBgNVHSMEGDAWgBS1HGkVPW+L7dE+BjJU+5IKq/DoUzAMBgNV
+HRMEBTADAQH/MAoGCCqGSM49BAMCA0kAMEYCIQD82qiTTWQWvZDW9zVpBV3c6kPR
+tKhhpt+YEAeTorudOwIhAPz4PzZmw2dW9paCUHmim00yVf4TAxqpPjoij3AdYjKR
+-----END CERTIFICATE-----

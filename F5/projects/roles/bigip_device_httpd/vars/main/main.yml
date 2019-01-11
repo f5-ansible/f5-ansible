@@ -1,0 +1,13 @@
+bigip_device_httpd:
+  - auth_name: BIG-IP
+    auth_pam_dashboard_timeout: no
+    auth_pam_idle_timeout: 1200
+    auth_pam_validate_ip: yes
+    fast_cgi_timeout: 300
+    hostname_lookup: no
+    log_level: warn
+    max_clients: 10
+    redirect_http_to_https: no
+    ssl_cipher_suite: ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:AES256-SHA256
+    ssl_port: 443
+    ssl_protocols: all:!SSLv2:!SSLv3

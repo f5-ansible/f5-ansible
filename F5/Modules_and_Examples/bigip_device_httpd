@@ -27,21 +27,25 @@
       user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
       validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
                                `F5_VALIDATE_CERTS'.
+
 - name: Set the BIG-IP authentication realm name
   bigip_device_httpd:
     auth_name: BIG-IP
+    auth_pam_dashboard_timeout: no
+    auth_pam_idle_timeout: 1200
+    auth_pam_validate_ip: yes
+    fast_cgi_timeout: 300
+    hostname_lookup: no
+    log_level: warn
+    max_clients: 10
+    redirect_http_to_https: no
+    ssl_cipher_suite: ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:AES256-SHA256
+    ssl_port: 443
+    ssl_protocols: all:!SSLv2:!SSLv3
 
-
-
-
-
-- name: Set the auth pam timeout to 3600 seconds
+- name: Set the auth pam timeout to 1200 seconds
   bigip_device_httpd:
     auth_pam_idle_timeout: 1200
-
-
-
-
 
 - name: Set the validate IP settings
   bigip_device_httpd:

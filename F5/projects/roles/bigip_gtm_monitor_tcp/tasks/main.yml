@@ -1,0 +1,11 @@
+- name: Create a GTM TCP monitor
+  bigip_gtm_monitor_tcp:
+    name: "{{ item.name }}"
+    ip: "{{ item.ip }}"
+    port: "{{ item.port }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_gtm_monitor_tcp }}"

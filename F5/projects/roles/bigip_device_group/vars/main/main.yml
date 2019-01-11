@@ -1,0 +1,7 @@
+bigip_device_group:
+  - name: sync-failover
+    state: present
+    full_sync: no
+    auto_sync: no
+    type: sync-failover
+    network_failover: yes

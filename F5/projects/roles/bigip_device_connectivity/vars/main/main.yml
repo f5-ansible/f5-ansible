@@ -1,0 +1,8 @@
+bigip_device_connectivity:
+  - cluster_mirroring: within-cluster
+    failover_multicast: no
+    config_sync_ip: 192.168.0.1
+    mirror_primary_address: 192.168.0.1
+    unicast_failover:
+      - address: management-ip
+      - address: 192.168.0.1 #failover

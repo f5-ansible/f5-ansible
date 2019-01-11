@@ -27,10 +27,8 @@
       virtual_server_dependencies:   # Specifies the virtual servers on which the current virtual server depends. If any of the specified servers are unavailable, the current virtual server is also listed as unavailable.
 
 
-- name: Manages F5 BIG-IP GTM virtual servers
+- name: Enable virtual server
   bigip_gtm_virtual_server:
-    name:
-    state:
-    address:
-    port:
-    server_name:
+    server_name: server1
+    name: my-virtual-server
+    state: enabled

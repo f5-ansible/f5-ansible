@@ -1,0 +1,30 @@
+---
+webpool:
+  - name: webpool_1
+    state: present
+    description: Dylan's pool
+    lb_method: round-robin
+    monitor_type: single
+    monitors:  http
+    slow_ramp_time: 300
+  - name: webpool_2
+    state: present
+    description: Dylan's pool
+    lb_method: round-robin
+    monitor_type: single
+    monitors:  http
+    slow_ramp_time: 300
+  - name: webpool_3
+    state: present
+    description: Dylan's pool
+    lb_method: round-robin
+    monitor_type: single
+    monitors:  http
+    slow_ramp_time: 300
+  - name: webpool_4
+    state: present
+    description: Dylan's pool
+    lb_method: round-robin
+    monitor_type: single
+    monitors:  http
+    slow_ramp_time: 300

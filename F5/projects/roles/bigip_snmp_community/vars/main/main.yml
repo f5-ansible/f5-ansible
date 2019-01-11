@@ -1,0 +1,9 @@
+bigip_snmp_community:
+  - community: iBFR99O_2
+    name: Dylan_Community
+    state: present
+    version: v2c
+    access: ro
+    ip_version: 4
+    source: all
+    oid: .1

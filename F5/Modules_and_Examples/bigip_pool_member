@@ -34,11 +34,21 @@
                                `F5_VALIDATE_CERTS'.
 
 
-Examles:
+
 - name: create pool members
   bigip_pool_member:
     name: member-1
     state: present
     address: 172.16.116.200
     port: 80
-    pool: web_pool_by_Dylan
+    pool: web_pool_by_Dylan_1
+    preserve_node: no
+    priority_group: 3
+
+- name: create pool members
+  bigip_pool_member:
+    name: member-1
+    state: present
+    address: 172.16.116.200
+    port: 80
+    pool: web_pool_by_Dylan_2

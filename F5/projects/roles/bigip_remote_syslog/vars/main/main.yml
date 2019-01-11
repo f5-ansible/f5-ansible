@@ -1,0 +1,5 @@
+bigip_remote_syslog:
+  - state: present
+    local_ip: none
+    remote_host: 172.16.191.200
+    remote_port: 514

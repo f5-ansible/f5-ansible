@@ -1,0 +1,5 @@
+bigip_ssl_certificate:
+  - { name: 'ssl_rsa-2048', content: "{{ lookup ('file', 'rsa_2048/server.crt') }}" }
+  - { name: 'ssl_rsa-2048_chain', content: "{{ lookup ('file', 'rsa_2048/mid_chain.crt') }}" }
+  - { name: 'ecc_256', content: "{{ lookup ('file', 'ecdsa_256/server.crt') }}" }
+  - { name: 'ecc_256_chain', content: "{{ lookup ('file', 'ecdsa_256/mid_chain.crt') }}" }

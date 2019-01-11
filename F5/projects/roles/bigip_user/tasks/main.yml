@@ -1,0 +1,30 @@
+- name: create a new user by Dylan
+  bigip_user:
+    full_name: Dylan Swift #description
+    username_credential: dylan
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    password_credential: default
+    shell: bash
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: create a new user without password by Dylan
+  bigip_user:
+    full_name: Dylan Swift #description
+    username_credential: dylan3
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    shell: bash
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"

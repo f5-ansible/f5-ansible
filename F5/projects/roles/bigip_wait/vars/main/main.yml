@@ -1,0 +1,2 @@
+bigip_wait:
+  - msg: "waiting for reboot"

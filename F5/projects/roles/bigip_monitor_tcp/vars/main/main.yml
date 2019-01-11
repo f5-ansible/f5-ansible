@@ -1,0 +1,9 @@
+---
+bigip_monitor_tcp:
+  - name: tcp_dylan
+    state: present
+    interval: 5
+    timeout: 16
+    time_until_up: 0
+    ip: '20.20.20.20'
+    port: '80'

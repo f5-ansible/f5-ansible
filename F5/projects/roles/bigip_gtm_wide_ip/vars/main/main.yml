@@ -1,0 +1,3 @@
+bigip_gtm_wide_ip:
+  - pool_lb_method: round-robin
+    name: my-wide-ip.example.com

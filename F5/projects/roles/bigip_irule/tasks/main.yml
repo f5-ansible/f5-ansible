@@ -4,3 +4,8 @@
     content: "{{ lookup ( 'file' , 'http_redirection.yml') }}"
     module: ltm
     state: present
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"

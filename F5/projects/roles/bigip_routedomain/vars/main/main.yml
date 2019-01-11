@@ -1,0 +1,17 @@
+bigip_routedomain:
+  - state: present
+    name: route_domain_1
+    bwc_policy: default
+    connection_limit: 0
+    flow_eviction_policy:
+    id: 1
+    parent: none
+    partition: /Common
+    routing_protocol:
+      - BGP
+      - OSPF
+    service_policy: none
+    strict: yes
+    vlans:
+      - vlan_333
+      - vlan_334

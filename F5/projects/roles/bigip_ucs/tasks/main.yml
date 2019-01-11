@@ -1,0 +1,63 @@
+- name: Upload UCS
+  bigip_ucs:
+    ucs: /root/bigip.localhost.localdomain.ucs
+    state: present
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: install sys ucs xxx.ucs
+  bigip_ucs:
+    ucs: /root/bigip.localhost.localdomain.ucs
+    state: installed
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: Install (upload, install) UCS without installing the license portion
+  bigip_ucs:
+    ucs: /root/bigip.localhost.localdomain.ucs
+    state: installed
+    no_license: yes
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: Install (upload, install) UCS except the license, and bypassing the platform check
+  bigip_ucs:
+    ucs: /root/bigip.localhost.localdomain.ucs
+    state: installed
+    no_license: yes
+    no_platform_check: yes
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: Install (upload, install) UCS using a passphrase necessary to load the UCS
+  bigip_ucs:
+    ucs: /root/bigip.localhost.localdomain.ucs
+    state: installed
+    passphrase: MyPassphrase1234
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+
+- name: Remove uploaded UCS file
+  bigip_ucs:
+    ucs: bigip.localhost.localdomain.ucs
+    state: absent
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"

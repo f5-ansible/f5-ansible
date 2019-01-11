@@ -1,0 +1,4 @@
+bigip_configsync_action:
+  - device_group: sync-failover
+    overwrite_config: yes
+    sync_device_to_group: yes

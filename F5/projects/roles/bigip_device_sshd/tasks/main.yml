@@ -1,0 +1,12 @@
+- name: Set the banner for the SSHD service from a string
+  bigip_device_sshd:
+    banner: "{{ item.banner}}"
+    banner_text: "{{ item.banner_text }}"
+    inactivity_timeout: "{{ item.inactivity_timeout }}"
+    login: "{{ item.login }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_sshd }}"

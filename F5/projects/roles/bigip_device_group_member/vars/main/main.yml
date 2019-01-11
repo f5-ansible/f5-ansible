@@ -1,0 +1,5 @@
+bigip_device_group_member:
+  - name:
+    - www.test2.com
+    - www.test1.com
+    device_group: sync-failover

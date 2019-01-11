@@ -1,0 +1,5 @@
+bigip_management_route:
+  - name: default
+    network: default
+    gateway: 192.168.1.2
+    state: present

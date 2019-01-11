@@ -1,0 +1,7 @@
+bigip_gtm_monitor_http:
+  - name: my_monitor
+    state: present
+    ip: 1.1.1.1
+    port: 80
+    send: ‘GET / HTTP/1.1’
+    receive: 'It Works'

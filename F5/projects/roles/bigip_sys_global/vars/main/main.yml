@@ -1,0 +1,9 @@
+bigip_sys_global:
+  - banner_text: 'This box is deployed by Dylan'
+    console_timeout: 500
+    gui_setup: disabled
+    lcd_display: disabled
+    mgmt_dhcp: disabled
+    net_reboot: disabled
+    quiet_boot: disabled
+    security_banner: 'you know what you are doing ?'

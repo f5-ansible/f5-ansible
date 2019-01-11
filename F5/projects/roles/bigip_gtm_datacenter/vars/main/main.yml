@@ -1,0 +1,7 @@
+bigip_gtm_datacenter:
+  - name: New_York
+    state: present
+    location: America
+  - name: Welllington
+    state: present
+    location: New_Zeland

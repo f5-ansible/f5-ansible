@@ -1,0 +1,7 @@
+bigip_profile_client_ssl:
+  - name: ssl_client_dylan
+    state: present
+    cert_key_chain:
+      - { cert: ssl_rsa-2048 , key: ssl_rsa-2048 , chain: ssl_rsa-2048_chain }
+      - { cert: ecc_256 , key: ecc_256 , chain: ecc_256_chain}
+    ciphers: 'default:!tlsv1'

@@ -1,0 +1,11 @@
+- name: Set NTP server
+  bigip_device_ntp:
+    state: "{{ item.state }}"
+    ntp_servers: "{{ item.ntp_servers }}"
+    timezone: "{{ item.timezone }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_ntp }}"

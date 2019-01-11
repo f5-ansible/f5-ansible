@@ -1,0 +1,8 @@
+- name: modify F5 Hostname
+  bigip_hostname:
+    hostname: "{{ F5_BIGIP_HOSTNAME }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"

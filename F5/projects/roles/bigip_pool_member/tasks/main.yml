@@ -1,0 +1,13 @@
+- name: create pool members
+  bigip_pool_member:
+    name: "{{ item.name }}"
+    state: present
+    address: "{{ item.address }}"
+    port: "{{ item.port }}"
+    pool: "{{ item.pool }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ pool_member }}"

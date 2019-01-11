@@ -40,5 +40,3 @@
     name: my_monitor
     ip: 1.1.1.1
     port: 80
-    send: ‘GET / HTTP/1.1’
-    receive: 'It Works'

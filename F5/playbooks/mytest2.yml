@@ -3,85 +3,62 @@
   hosts: F5
   connection: local
   gather_facts: no
-  vars:
-    ssl_rsa_certificates_patch: "../Files/ssl_certificates/rsa_2048"
   tasks:
-  - name: Manage user accounts and user attributes on a BIG-IP
-    bigip_user:
-      full_name: Dylan Swift
-      username_credential: dylan
-      update_password: on_create
+  - name: Creating a pool by Dylan
+    bigip_pool:
+      name: web_pool_by_Dylan_1
       state: present
-      partition: /Common
-      partition_access: all:admin
-      password_credential: default
-      shell: bash
-  - name: create a new user by Dylan
-    bigip_user:
-      full_name: Dylan Swift #description
-      username_credential: dylan2
-      update_password: on_create
-      state: present
-      partition: /Common
-      partition_access: all:admin
-      password_credential: "!!"
-      shell: bash
+      description: my first test pool
+      lb_method: round-robin
+      monitor_type: single
+      monitors: http
+      slow_ramp_time: 300
+      service_down_action: none
+      priority_group_activation: 2
 
-  - name: create a new user by Dylan
-    bigip_user:
-      full_name: Dylan Swift #description
-      username_credential: dylan3
-      update_password: on_create
+  - name: Creating a pool by Dylan
+    bigip_pool:
+      name: web_pool_by_Dylan_2
       state: present
-      partition: /Common
-      partition_access: all:admin
-      shell: bash
-  - name: Manage LTM virtual addresses on a BIG-IP
-    bigip_virtual_address:
-      address: 10.10.10.10
-      arp: yes
-      auto_delete: yes
-      icmp_echo: enabled
-      route_advertisement: disabled
-  - name: run tmsh command on F5
-    bigip_command:
-      commands: list ltm virtual
-      wait_for: result[0] contains vs_10.10.10.10
-  - name: Manages device IP configuration settings for HA on a BIG-IP
-    bigip_device_connectivity:
-      cluster_mirroring: within-cluster
-      failover_multicast: no
-      config_sync_ip: 172.16.116.251
-      mirror_primary_address: 172.16.116.251
-      unicast_failover:
-        - address: management-ip
-        - address: 172.16.116.251 #failover
-  - name: Set the DNS settings on the BIG-IP
-    bigip_device_dns:
-      name_servers:
-        - 114.114.114.114
-        - 8.8.8.8
-      search:
-        - localdomain
-        - lab.local
-  - name: create a sync-failover device group
-    bigip_device_group:
-      name: sync-failover
+      description: my first test pool
+      lb_method: round-robin
+      monitor_type: m_of_n
+      quorum: 2
+      monitors:
+        - tcp
+        - http
+      slow_ramp_time: 300
+      service_down_action: none
+      priority_group_activation: 2
+
+  - name: Creating a pool by Dylan
+    bigip_pool:
+      name: web_pool_by_Dylan_3
       state: present
-      full_sync: no
-      auto_sync: no
-      type: sync-failover
-      network_failover: yes
-  - name: create a sync-only device group
-    bigip_device_group:
-      name: sync-only
+      description: my first test pool
+      lb_method: round-robin
+      monitor_type: and_list
+      monitors:
+        - tcp
+        - http
+      slow_ramp_time: 300
+      service_down_action: none
+      priority_group_activation: 2
+  - name: create pool members
+    bigip_pool_member:
+      name: 172.16.116.200
       state: present
-      full_sync: no
-      auto_sync: yes
-      type: sync-failover
-      network_failover: yes
-  - name: Manages members in a device group
-    bigip_device_group_member:
-      name: www.icbc.com.cn
+      address: 172.16.116.200
+      port: 80
+      pool: web_pool_by_Dylan_1
+      preserve_node: no
+      priority_group: 3
+
+  - name: create pool members
+    bigip_pool_member:
+      name: 172.16.116.200
       state: present
-      device_group: sync-failover
+      address: 172.16.116.200
+      port: 80
+      pool: web_pool_by_Dylan_2
+      preserve_node: no

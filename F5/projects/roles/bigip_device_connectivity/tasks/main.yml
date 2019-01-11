@@ -1,0 +1,13 @@
+- name: Manages device IP configuration settings for HA on a BIG-IP
+  bigip_device_connectivity:
+    cluster_mirroring: "{{ item.cluster_mirroring }}"
+    failover_multicast: "{{ item.failover_multicast }}"
+    config_sync_ip: "{{ item.config_sync_ip }}"
+    mirror_primary_address: "{{ item.mirror_primary_address }}"
+    unicast_failover: "{{ item.unicast_failover }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_connectivity }}"

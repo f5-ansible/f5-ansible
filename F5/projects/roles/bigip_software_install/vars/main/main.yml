@@ -1,0 +1,11 @@
+bigip_software_installed:
+  - image: BIGIP-12.1.2.0.0.249.iso
+    state: installed #activated
+    volume: HD1.3
+  - image: Hotfix-BIGIP-12.1.2.2.0.276-HF2.iso
+    state: installed
+    volume: HD1.3
+bigip_software_activated:
+  - image: Hotfix-BIGIP-12.1.2.2.0.276-HF2.iso
+    state: activated
+    volume: HD1.3

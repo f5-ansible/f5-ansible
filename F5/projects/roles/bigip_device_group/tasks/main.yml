@@ -1,0 +1,14 @@
+- name: create a sync-failover device group
+  bigip_device_group:
+    name: sync-failover
+    state: present
+    full_sync: no
+    auto_sync: no
+    type: sync-failover
+    network_failover: yes
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_group }}"

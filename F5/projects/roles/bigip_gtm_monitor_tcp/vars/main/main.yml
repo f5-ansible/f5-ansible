@@ -1,0 +1,4 @@
+bigip_gtm_monitor_tcp:
+  - name: my_monitor
+    ip: 1.1.1.1
+    port: 80

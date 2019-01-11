@@ -1,0 +1,9 @@
+- name: Collect all BIG-IP facts
+  bigip_device_facts:
+    gather_subset: "{{ item.gather_subset }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_facts }}"

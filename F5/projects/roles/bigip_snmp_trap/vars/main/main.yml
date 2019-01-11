@@ -1,0 +1,6 @@
+bigip_snmp_trap:
+  - name: Dylan_Community
+    community: comm-2
+    destination: 172.16.116.200
+    network: management
+    snmp_version: v2c

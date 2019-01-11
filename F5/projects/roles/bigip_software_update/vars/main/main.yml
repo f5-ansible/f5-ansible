@@ -1,0 +1,4 @@
+- name: Manage the software update settings of a BIG-IP
+  bigip_software_update:
+    auto_check: no
+    auto_phone_home: no

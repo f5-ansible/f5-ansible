@@ -1,0 +1,5 @@
+bigip_software_image:
+  - force: no
+    image: '/Users/huaiqingcheng/Desktop/F5/Images/BIGIP-12.1.2.0.0.249.iso'
+  - force: no
+    image: '/Users/huaiqingcheng/Desktop/F5/Images/Hotfix-BIGIP-12.1.2.2.0.276-HF2.iso'

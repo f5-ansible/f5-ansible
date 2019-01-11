@@ -1,0 +1,8 @@
+bigip_smtp:
+  - name: Dylan_smtp
+    state: present
+    smtp_server: 1.1.1.1
+    smtp_server_username: admin
+    smtp_server_password: admin
+    local_host_name: smtp.dylan.com
+    from_address: f5@dylan.com

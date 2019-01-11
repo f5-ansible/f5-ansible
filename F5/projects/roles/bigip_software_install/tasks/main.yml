@@ -1,0 +1,25 @@
+- name: Install software base images and hotfix by Dylan
+  bigip_software_install:
+    image: "{{ item.image }}"
+    state: "{{ item.state }}"
+    volume: "{{ item.volume }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  ignore_errors: True
+  loop: "{{ bigip_software_installed }}"
+
+- name: Activate boot location and reboot by Dylan
+  bigip_software_install:
+    image: "{{ item.image }}"
+    state: "{{ item.state }}"
+    volume: "{{ item.volume }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  ignore_errors: True
+  loop: "{{ bigip_software_activated }}"

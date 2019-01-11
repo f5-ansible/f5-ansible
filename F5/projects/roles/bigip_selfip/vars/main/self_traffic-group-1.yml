@@ -1,0 +1,14 @@
+---
+bigip_floatingip:
+  - name: 10.10.10.254
+    address: 10.10.10.254
+    netmask: 255.255.255.0
+    vlan: vlan_10
+    traffic_group: /Common/traffic-group-1
+    allow_service: all
+  - name: 20.20.20.254
+    address: 20.20.20.254
+    netmask: 255.255.255.0
+    vlan: vlan_20
+    traffic_group: /Common/traffic-group-1
+    allow_service: all

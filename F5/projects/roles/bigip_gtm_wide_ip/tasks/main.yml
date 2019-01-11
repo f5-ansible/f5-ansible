@@ -1,0 +1,10 @@
+- name: Set lb method
+  bigip_gtm_wide_ip:
+    pool_lb_method: "{{ item.pool_lb_method }}"
+    name: "{{ item.name }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_gtm_wide_ip }}"

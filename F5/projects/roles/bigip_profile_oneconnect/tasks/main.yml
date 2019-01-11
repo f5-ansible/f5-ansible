@@ -1,0 +1,17 @@
+- name: create oneconnect profile by Dylan
+  bigip_profile_oneconnect:
+    name: "{{ item.name}}"
+    state: "{{ item.state }}"
+    idle_timeout_override: "{{ item.idle_timeout_override }}"
+    limit_type: "{{ item.limit_type }}"
+    maximum_age: "{{ item.maximum_age }}"
+    maximum_reuse: "{{ item.maximum_reuse }}"
+    maximum_size: "{{ item.maximum_size }}"
+    share_pools: "{{ item.share_pools }}"
+    source_mask: "{{ item.source_mask }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_profile_oneconnect }}"

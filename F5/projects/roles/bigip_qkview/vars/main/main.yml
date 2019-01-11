@@ -1,0 +1,4 @@
+bigip_qkview:
+  - asm_request_log: no
+    complete_information: yes
+    dest: "/Users/huaiqingcheng/Documents/myansible/F5/Files/qkview/test.qkview"

@@ -1,0 +1,13 @@
+- name: create ltm datagroup
+  bigip_data_group:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    type: "{{ item.type }}"
+    internal: "{{ item.internal }}"
+    records: "{{ item.records }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_data_group }}"

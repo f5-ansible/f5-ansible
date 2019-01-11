@@ -1,0 +1,14 @@
+- name: create a http compression profile by Dylan
+  bigip_profile_http_compression:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    buffer_size: "{{ item.buffer_size }}"
+    gzip_level:  "{{ item.gzip_level }}"
+    gzip_memory_level: "{{ item.gzip_memory_level }}"
+    gzip_window_size: "{{ item.gzip_window_size }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_profile_http_compression }}"

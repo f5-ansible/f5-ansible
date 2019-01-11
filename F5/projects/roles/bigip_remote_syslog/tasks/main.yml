@@ -1,0 +1,12 @@
+- name: Manipulate remote syslog settings
+  bigip_remote_syslog:
+    state: "{{ item.state }}"
+    local_ip: "{{ item.local_ip }}"
+    remote_host: "{{ item.remote_host }}"
+    remote_port: "{{ item.remote_port }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+ loop: "{{ bigip_remote_syslog }}"

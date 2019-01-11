@@ -1,0 +1,4 @@
+bigip_device_license:
+  #- license_key: "HJSNO-YSRMH-YNIQH-ZNLRY-LWWVAJB"
+  #  accept_eula: yes
+  - accept_eula: yes

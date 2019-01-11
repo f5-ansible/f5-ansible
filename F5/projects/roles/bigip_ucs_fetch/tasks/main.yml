@@ -1,0 +1,10 @@
+- name: Fetches a UCS file from remote nodes
+  bigip_ucs_fetch:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_ucs_fetch }}"

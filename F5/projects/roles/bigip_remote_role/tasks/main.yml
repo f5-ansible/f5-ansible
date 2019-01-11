@@ -1,0 +1,16 @@
+- name: create remote roles
+  bigip_remote_role:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    assigned_role: "{{ item.assigned_role }}"
+    attribute_string: "{{ item.attribute_string }}"
+    line_order: "{{ item.line_order }}"
+    partition_access: "{{ item.partition_access }}"
+    terminal_access: "{{ item.terminal_access }}"
+    remote_access: "{{ item.remote_access }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_remote_role }}"

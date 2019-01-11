@@ -1,0 +1,4 @@
+bigip_profile_tcp:
+  - name: tcp_300
+    idle_timeout: 300
+    time_wait_recycle: yes

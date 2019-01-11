@@ -1,0 +1,13 @@
+- name: Manipulate SNMP trap information
+  bigip_snmp_trap:
+    name: "{{ item.name }}"
+    community: "{{ item.community }}"
+    destination: "{{ item.destination }}"
+    network: "{{ item.network }}"
+    snmp_version: "{{ item.snmp_version }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_snmp_trap }}"

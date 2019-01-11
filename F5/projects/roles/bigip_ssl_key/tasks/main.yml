@@ -1,0 +1,11 @@
+- name: import ssl keys by Dylan
+  bigip_ssl_key:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    content: "{{ item.content }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_ssl_key }}"

@@ -1,0 +1,7 @@
+bigip_virtual_address:
+  - address: 10.10.10.10
+    arp: yes
+    auto_delete: yes
+    icmp_echo: enabled
+    route_advertisement: disabled
+    traffic_group: /Common/traffic-group-1

@@ -1,0 +1,11 @@
+- name: Create data center "New York"
+  bigip_gtm_datacenter:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    location: "{{ item.location }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_gtm_datacenter }}"

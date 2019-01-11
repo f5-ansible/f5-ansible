@@ -1,0 +1,11 @@
+- name: run cm config-sync to-group device_group_failover
+  bigip_configsync_action:
+    device_group: "{{ item.device_group}}"
+    overwrite_config: "{{ item.overwrite_config }}"
+    sync_device_to_group: "{{ item.sync_device_to_group }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_configsync_action }}"

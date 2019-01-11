@@ -1,11 +1,12 @@
 - name: crete vlans by Dylan
   bigip_vlan:
-    name: "{{ vlan_name }}"
-    state: present
-    tag: "{{ vlan_tag }}"
-    tagged_interfaces: "{{ vlan_tagged_interfaces }}"
-  register: result
-- name: test result
-  assert:
-    that:
-      - result is succeeded
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    tag: "{{ item.tag }}"
+    tagged_interfaces: "{{ item.tagged_interfaces }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_vlan }}"

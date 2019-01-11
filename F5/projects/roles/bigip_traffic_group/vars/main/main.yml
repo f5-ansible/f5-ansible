@@ -1,0 +1,4 @@
+bigip_traffic_group:
+  - name: traffic-group-2
+    state: present
+    mac_address: ""

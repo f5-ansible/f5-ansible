@@ -1,1 +1,14 @@
 ---
+bigip_vlan:
+  - name: vlan_10
+    state: present
+    tag: 10
+    tagged_interfaces: 1.1
+  - name: vlan_20
+    state: present
+    tag: 20
+    tagged_interfaces: 1.1
+  - name: vlan_4094
+    state: present
+    tag: 4094
+    tagged_interfaces: 1.8

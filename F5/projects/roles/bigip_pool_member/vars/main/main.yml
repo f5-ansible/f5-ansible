@@ -1,0 +1,62 @@
+---
+pool_member:
+  - name: 20.20.20.200
+    state: present
+    address: 20.20.20.200
+    port: 80
+    pool: webpool_1
+  - name: 20.20.20.201
+    state: present
+    address: 20.20.20.201
+    port: 80
+    pool: webpool_1
+  - name: 20.20.20.202
+    state: present
+    address: 20.20.20.202
+    port: 80
+    pool: webpool_1
+  - name: 20.20.20.203
+    state: present
+    address: 20.20.20.203
+    port: 80
+    pool: webpool_2
+  - name: 20.20.20.204
+    state: present
+    address: 20.20.20.204
+    port: 80
+    pool: webpool_2
+  - name: 20.20.20.205
+    state: present
+    address: 20.20.20.205
+    port: 80
+    pool: webpool_2
+  - name: 20.20.20.206
+    state: present
+    address: 20.20.20.206
+    port: 80
+    pool: webpool_3
+  - name: 20.20.20.207
+    state: present
+    address: 20.20.20.207
+    port: 80
+    pool: webpool_3
+  - name: 20.20.20.208
+    state: present
+    address: 20.20.20.208
+    port: 80
+    pool: webpool_3
+  - name: 20.20.20.209
+    state: present
+    address: 20.20.20.209
+    port: 80
+    pool: webpool_4
+  - name: 20.20.20.210
+    state: present
+    address: 20.20.20.210
+    port: 80
+    pool: webpool_4
+  - name: 20.20.20.211
+    state: present
+    address: 20.20.20.211
+    port: 80
+    pool: webpool_4

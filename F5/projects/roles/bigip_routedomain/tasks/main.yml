@@ -1,0 +1,20 @@
+- name: Manage route domains
+  bigip_routedomain:
+    state: "{{ item.state }}"
+    name: "{{ item.name }}"
+    bwc_policy: "{{ item.bwc_policy }}"
+    connection_limit: "{{ item.connection_limit }}"
+    flow_eviction_policy: "{{ item.flow_eviction_policy }}"
+    id: "{{ item.id }}"
+    parent: "{{ item.parent }}"
+    partition: "{{ item. partition }}"
+    routing_protocol: "{{ item.routing_protocol }}"
+    service_policy: "{{ item.service_policy }}"
+    strict: "{{ item.strict }}"
+    vlans: "{{ item.vlans }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: {{ bigip_routedomain }}

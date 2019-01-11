@@ -1,0 +1,9 @@
+bigip_profile_persistence_src_addr:
+  - name: persistence_src_addr
+    state: present
+    entry_timeout: 180
+    hash_algorithm: default
+    match_across_pools: yes
+    match_across_services: no
+    match_across_virtuals: no
+    override_connection_limit: yes

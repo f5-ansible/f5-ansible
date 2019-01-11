@@ -1,0 +1,18 @@
+bigip_user:
+  - full_name: Dylan Swift #description
+    username_credential: dylan
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    password_credential: default
+    shell: bash
+
+bigip_user:
+  - full_name: Dylan Swift #description
+    username_credential: dylan3
+    update_password: on_create
+    state: present
+    partition: /Common
+    partition_access: all:admin
+    shell: bash

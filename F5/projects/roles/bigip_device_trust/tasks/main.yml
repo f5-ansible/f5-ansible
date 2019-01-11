@@ -1,0 +1,12 @@
+- name: Add trusts for all peer devices to Active device
+  bigip_device_trust:
+    peer_server: "{{ item.peer_server }}"
+    peer_user: "{{ item.peer_user }}"
+    peer_password: "{{ item.peer_password }}"
+    peer_hostname: "{{ hostvars['192.168.1.246']['F5_BIGIP_HOSTNAME']}}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_device_trust }}"

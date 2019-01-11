@@ -27,6 +27,4 @@
   bigip_gtm_pool:
     name: bigip_gtm_pool
     state: present
-    preferred_lb_method:
-    members:
-    - 
+    preferred_lb_method: round_robin

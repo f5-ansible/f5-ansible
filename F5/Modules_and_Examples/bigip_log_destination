@@ -14,3 +14,22 @@
       user:                  # (required) The username to connect to the BIG-IP with. This user must have administrative privileges on the device. You may omit this option by setting the environment variable `F5_USER'.
       validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
                                `F5_VALIDATE_CERTS'.
+
+
+
+- name: Create a high-speed logging destination by Dylan
+  bigip_log_destination:
+    name: foo
+    state: present
+    type: remote-high-speed-log #remote-syslog
+    pool_settings:
+      pool: my-log-pool
+
+- name: Create a remote-syslog logging destination Dylan
+  bigip_log_destination:
+    name: foo
+    state: present
+    type: remote-syslog
+    syslog_settings:
+      syslog_format: rfc5424
+      forward_to: my-destination

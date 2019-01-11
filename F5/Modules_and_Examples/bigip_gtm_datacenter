@@ -19,6 +19,6 @@
 
 - name: Create data center "New York"
   bigip_gtm_datacenter:
-    name: BJ-xierqi
+    name: shenzhen-nanshan
     state: present
-    location: BJ
+    location: shenzhen

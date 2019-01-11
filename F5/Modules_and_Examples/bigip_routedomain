@@ -30,9 +30,9 @@
     name: route_domain_1
     bwc_policy: default
     connection_limit: 0
-    flow_eviction_policy:
+    flow_eviction_policy: none
     id: 1
-    parent:
+    parent: none
     partition: /Common
     routing_protocol:
       - BGP

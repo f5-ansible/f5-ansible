@@ -26,3 +26,11 @@
       validate_certs:        # If `no', SSL certificates are not validated. Use this only on personally controlled sites using self-signed certificates. You may omit this option by setting the environment variable
                                `F5_VALIDATE_CERTS'.
       virtual_server:        # (required) Specifies the name of the GTM virtual server which is assigned to the specified `server'.
+
+- name: Create a gtm pool member
+  bigip_gtm_pool_member:
+    name: foo
+    state: present
+    server_name: test
+    virtual_server: vs_10.10.10.10
+    

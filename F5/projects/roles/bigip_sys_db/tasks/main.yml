@@ -1,0 +1,11 @@
+- name: Manage BIG-IP system database variables
+  bigip_sys_db:
+    state: "{{ item.state }}"
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: {{ bigip_sys_db }}

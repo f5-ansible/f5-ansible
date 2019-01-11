@@ -1,9 +1,426 @@
 ---
-- name: deployment https app
-  hosts: F5
+- name: deployment standy unit
+  hosts: 192.168.1.246
+  connection: local
+  gather_facts: yes
+  tasks:
+  - name: gathering bigip facts ...
+    include_role:
+      name: bigip_device_facts
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: transiting images ...
+    include_role:
+      name: bigip_software_image
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+  - name: install dest images ...
+    include_role:
+      name: bigip_software_install
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: waiting bigip ready ...
+    include_role:
+      name: bigip_wait
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: modify bigip dns by Dylan
+    include_role:
+      name: bigip_device_dns
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: modify bigip default mgmt route by Dylan
+    include_role:
+      name: bigip_management_route
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: activate bigip by Dylan
+    include_role:
+      name: bigip_device_license
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: provisoning bigip by Dylan
+    include_role:
+      name: bigip_provision
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: set hostname by Dylan
+    include_role:
+      name: bigip_hostname
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: set ntp by Dylan
+    include_role:
+      name: bigip_device_ntp
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: create vlans by Dylan
+    include_role:
+      name: bigip_vlan
+      apply:
+        tags:
+          - bigip_underlay_configuration
+    tags:
+      - bigip_underlay_configuration
+
+  - name: create selfip by Dylan
+    include_role:
+      name: bigip_selfip
+      tasks_from: 2.yml
+      apply:
+        tags:
+          - bigip_underlay_configuration
+    tags:
+      - bigip_underlay_configuration
+
+  - name: configure bigip device connectivity
+    include_role:
+      name: bigip_device_connectivity
+      apply:
+        tags:
+          - bigip_device_connectivity
+    tags:
+      - bigip_device_connectivity
+
+
+
+
+- name: deployment active unit
+  hosts: 192.168.1.245
   connection: local
   gather_facts: no
-  roles:
-    - bigip_vlan
-    - bigip_trunk
-    - bigip_irule
+  tasks:
+  - name: gathering bigip facts ...
+    include_role:
+      name: bigip_device_facts
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: transiting images ...
+    include_role:
+      name: bigip_software_image
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: install dest images ...
+    include_role:
+      name: bigip_software_install
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+    ignore_errors: True
+
+  - name: waiting bigip ready ...
+    include_role:
+      name: bigip_wait
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: modify bigip dns by Dylan
+    include_role:
+      name: bigip_device_dns
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: modify bigip default mgmt route by Dylan
+    include_role:
+      name: bigip_management_route
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: activate bigip by Dylan
+    include_role:
+      name: bigip_device_license
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: provisoning bigip by Dylan
+    include_role:
+      name: bigip_provision
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: set hostname by Dylan
+    include_role:
+      name: bigip_hostname
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+  - name: set ntp by Dylan
+    include_role:
+      name: bigip_device_ntp
+      apply:
+        tags:
+          - bigip_initialization
+    tags:
+      - bigip_initialization
+
+  - name: create vlans by Dylan
+    include_role:
+      name: bigip_vlan
+      apply:
+        tags:
+          - bigip_underlay_configuration
+    tags:
+      - bigip_underlay_configuration
+
+  - name: create selfip by Dylan
+    include_role:
+      name: bigip_selfip
+      tasks_from: 1.yml
+      apply:
+        tags:
+          - bigip_underlay_configuration
+    tags:
+      - bigip_underlay_configuration
+
+  - name: configure bigip device connectivity
+    include_role:
+      name: bigip_device_connectivity
+      apply:
+        tags:
+          - bigip_device_connectivity
+    tags:
+      - bigip_device_connectivity
+
+  - name: configure bigip device trust
+    include_role:
+      name: bigip_device_trust
+      apply:
+        tags:
+          - bigip_synchronization_configuration
+    tags:
+      - bigip_synchronization_configuration
+
+  - name: configure bigip device bigip_data_group
+    include_role:
+      name: bigip_device_group
+      apply:
+        tags:
+          - bigip_synchronization_configuration
+    tags:
+      - bigip_synchronization_configuration
+
+  - name: configure bigip device bigip_data_group
+    include_role:
+      name: bigip_device_group_member
+      apply:
+        tags:
+          - bigip_synchronization_configuration
+    tags:
+      - bigip_synchronization_configuration
+
+  - name: create snat_pool by Dylan
+    include_role:
+      name: bigip_snat_pool
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: create tcp monitor by Dylan
+    include_role:
+      name: bigip_monitor_tcp
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: create http monitor by Dylan
+    include_role:
+      name: bigip_monitor_http
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: create tcp profile by Dylan
+    include_role:
+      name: bigip_profile_tcp
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: create http profile by Dylan
+    include_role:
+      name: bigip_profile_http
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: create oneconnect profile by Dylan
+    include_role:
+      name: bigip_profile_oneconnect
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: import ssl rsa and ecdsa key files by Dylan
+    include_role:
+      name: bigip_ssl_key
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: import ssl rsa and ecdsa certificate files by Dylan
+    include_role:
+      name: bigip_ssl_certificate
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: import ssl rsa and ecdsa key file by Dylan
+    include_role:
+      name: bigip_profile_client_ssl
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: crate data group by Dylan
+    include_role:
+      name: bigip_data_group
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: import irule files by Dylan
+    include_role:
+      name: bigip_irule
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: crete source address persistence profile
+    include_role:
+      name: bigip_profile_persistence_src_addr
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: crete ltm pool
+    include_role:
+      name: bigip_pool
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: crete ltm pool members
+    include_role:
+      name: bigip_pool_member
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: crete ltm virtual server
+    include_role:
+      name: bigip_virtual_server
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: save sys config
+    include_role:
+      name: bigip_config
+      apply:
+        tags:
+          - bigip_configuration_modify
+    tags:
+      - bigip_configuration_modify
+
+  - name: perform bigip synchronization test
+    include_role:
+      name: bigip_configsync_action
+      apply:
+        tags:
+          - bigip_synchronization

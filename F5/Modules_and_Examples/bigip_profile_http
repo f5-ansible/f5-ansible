@@ -31,5 +31,5 @@
   bigip_profile_http:
     name: http_redirect
     state: present
-    proxy_type: Reverse
+    proxy_type: reverse
     redirect_rewrite: all

@@ -1,0 +1,7 @@
+bigip_static_route:
+  - name: default
+    destination: 0.0.0.0
+    netmask: 0.0.0.0
+    gateway_address: 172.16.116.1
+    mtu: 1500
+    route_domain: 0

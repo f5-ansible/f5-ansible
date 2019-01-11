@@ -33,10 +33,132 @@
 Examles:
 - name: Creating a pool by Dylan
   bigip_pool:
-    name: web_pool_by_Dylan
+    name: web_pool_by_Dylan_1
     state: present
     description: my first test pool
     lb_method: round-robin
     monitor_type: single
     monitors: http
     slow_ramp_time: 300
+    service_down_action: none
+    priority_group_activation: 2
+
+- name: Creating a pool by Dylan
+  bigip_pool:
+    name: web_pool_by_Dylan_2
+    state: present
+    description: my first test pool
+    lb_method: round-robin
+    monitor_type: m_of_n
+    quorum: 2
+    monitors:
+      - tcp
+      - http
+    slow_ramp_time: 300
+    service_down_action: none
+    priority_group_activation: 2
+
+- name: Creating a pool by Dylan
+  bigip_pool:
+    name: web_pool_by_Dylan_3
+    state: present
+    description: my first test pool
+    lb_method: round-robin
+    monitor_type: and_list
+    monitors:
+      - tcp
+      - http
+    slow_ramp_time: 300
+    service_down_action: none
+    priority_group_activation: 2
+
+root@(www)(cfg-sync Standalone)(Active)(/Common)(tmos)# list ltm pool web_pool_by_Dylan_1 all-properties
+    ltm pool web_pool_by_Dylan_1 {
+        allow-nat yes
+        allow-snat yes
+        app-service none
+        autoscale-group-id none
+        description "my first test pool"
+        gateway-failsafe-device none
+        ignore-persisted-weight disabled
+        ip-tos-to-client pass-through
+        ip-tos-to-server pass-through
+        link-qos-to-client pass-through
+        link-qos-to-server pass-through
+        load-balancing-mode round-robin
+        members none
+        metadata none
+        min-active-members 2
+        min-up-members 0
+        min-up-members-action failover
+        min-up-members-checking disabled
+        monitor http
+        partition Common
+        profiles none
+        queue-depth-limit 0
+        queue-on-connection-limit disabled
+        queue-time-limit 0
+        reselect-tries 0
+        service-down-action none
+        slow-ramp-time 300
+    }
+    root@(www)(cfg-sync Standalone)(Active)(/Common)(tmos)# list ltm pool web_pool_by_Dylan_2 all-properties
+    ltm pool web_pool_by_Dylan_2 {
+        allow-nat yes
+        allow-snat yes
+        app-service none
+        autoscale-group-id none
+        description "my first test pool"
+        gateway-failsafe-device none
+        ignore-persisted-weight disabled
+        ip-tos-to-client pass-through
+        ip-tos-to-server pass-through
+        link-qos-to-client pass-through
+        link-qos-to-server pass-through
+        load-balancing-mode round-robin
+        members none
+        metadata none
+        min-active-members 2
+        min-up-members 0
+        min-up-members-action failover
+        min-up-members-checking disabled
+        monitor min 2 of { tcp http }
+        partition Common
+        profiles none
+        queue-depth-limit 0
+        queue-on-connection-limit disabled
+        queue-time-limit 0
+        reselect-tries 0
+        service-down-action none
+        slow-ramp-time 300
+    }
+    root@(www)(cfg-sync Standalone)(Active)(/Common)(tmos)# list ltm pool web_pool_by_Dylan_3 all-properties
+    ltm pool web_pool_by_Dylan_3 {
+        allow-nat yes
+        allow-snat yes
+        app-service none
+        autoscale-group-id none
+        description "my first test pool"
+        gateway-failsafe-device none
+        ignore-persisted-weight disabled
+        ip-tos-to-client pass-through
+        ip-tos-to-server pass-through
+        link-qos-to-client pass-through
+        link-qos-to-server pass-through
+        load-balancing-mode round-robin
+        members none
+        metadata none
+        min-active-members 2
+        min-up-members 0
+        min-up-members-action failover
+        min-up-members-checking disabled
+        monitor tcp and http
+        partition Common
+        profiles none
+        queue-depth-limit 0
+        queue-on-connection-limit disabled
+        queue-time-limit 0
+        reselect-tries 0
+        service-down-action none
+        slow-ramp-time 300
+    }

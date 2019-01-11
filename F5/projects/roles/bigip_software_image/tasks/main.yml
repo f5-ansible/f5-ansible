@@ -1,0 +1,10 @@
+- name: Manage software images by Dylan
+  bigip_software_image:
+    force: "{{ item.force }}"
+    image: "{{ item.image }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_software_image }}"

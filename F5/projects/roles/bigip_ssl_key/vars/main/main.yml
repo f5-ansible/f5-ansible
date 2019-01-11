@@ -1,0 +1,7 @@
+bigip_ssl_key:
+  - name: ssl_rsa-2048
+    content: "{{ lookup ('file', 'rsa_2048/server.key') }}"
+    state: present
+  - name: ecc_256
+    content: "{{ lookup ('file', 'ecdsa_256/server.key') }}"
+    state: present

@@ -1,0 +1,16 @@
+- name: create source_addr profile by Dylan
+  bigip_profile_persistence_src_addr:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    entry_timeout: "{{ item.entry_timeout }}"
+    hash_algorithm: "{{ item.hash_algorithm }}"
+    match_across_pools: "{{ item.match_across_pools }}"
+    match_across_services: "{{ item.match_across_services }}"
+    match_across_virtuals: "{{ item.match_across_virtuals }}"
+    override_connection_limit: "{{ item.override_connection_limit }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_profile_persistence_src_addr }}"

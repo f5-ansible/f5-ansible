@@ -1,0 +1,21 @@
+bigip_virtual_server:
+  - default_persistence_profile: /Common/cookie
+    fallback_persistence_profile: /Common/persistence_src_addr
+    irules: rule_from_dylan
+    ip_protocol: tcp
+    enabled_vlans:
+      - vlan_10
+    description: Created by Dylan
+    destination: 100.100.100.100
+    name: vs_100.100.100.100_443
+    type: standard
+    state: present
+    pool: webpool_1
+    port: 443
+    snat: /Common/snat_pool_20.20.20.251_and_250
+    source: 0.0.0.0/0
+    profiles:
+      - tcp_300
+      - http_redirect
+      - name: ssl_client_dylan
+        context: client-side

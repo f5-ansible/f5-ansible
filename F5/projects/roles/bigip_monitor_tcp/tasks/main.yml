@@ -1,0 +1,15 @@
+- name: create tcp monitor
+  bigip_monitor_tcp:
+    name: "{{ item.name }}"
+    state: present
+    interval: "{{ item.interval }}"
+    timeout: "{{ item.timeout }}"
+    time_until_up: "{{ item.time_until_up }}"
+    ip: "{{ item.ip }}"
+    port: "{{ item.port }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_monitor_tcp }}"

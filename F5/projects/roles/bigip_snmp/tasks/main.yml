@@ -1,0 +1,15 @@
+- name: Create a base SMTP server configuration
+  bigip_smtp:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    smtp_server: "{{ item.smtp_server }}"
+    smtp_server_username: "{{ item.smtp_server_username }}"
+    smtp_server_password: "{{ item.smtp_server_password }}"
+    local_host_name: "{{ item.local_host_name }}"
+    from_address: "{{ item.from_address }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+ loop: "{{ bigip_smtp }}"

@@ -1,0 +1,12 @@
+- name: create tcp profile by Dylan
+  bigip_profile_tcp:
+    name: "{{ item.name }}"
+    state: present
+    idle_timeout: "{{ item.idle_timeout }}"
+    time_wait_recycle: "{{ item.time_wait_recycle }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_profile_tcp }}"

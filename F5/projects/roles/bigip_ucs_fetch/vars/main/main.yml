@@ -1,0 +1,3 @@
+bigip_ucs_fetch:
+  - src: cs_backup.ucs
+    dest: /tmp/cs_backup.ucs

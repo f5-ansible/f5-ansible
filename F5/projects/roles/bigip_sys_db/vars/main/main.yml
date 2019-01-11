@@ -1,0 +1,4 @@
+bigip_sys_db:
+  - state: present
+    key: acceleration.log.level
+    value: show_name

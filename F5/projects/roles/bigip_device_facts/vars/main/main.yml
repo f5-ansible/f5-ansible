@@ -1,0 +1,6 @@
+bigip_device_facts:
+  - gather_subset:
+    #- vlans
+    #- interfaces
+    #- monitors
+    - devices

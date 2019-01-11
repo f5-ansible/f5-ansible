@@ -1,0 +1,5 @@
+bigip_device_ntp:
+  - state: present
+    ntp_servers:
+      - cn.pool.ntp.org
+    timezone: Asia/Shanghai

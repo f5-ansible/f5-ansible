@@ -1,0 +1,12 @@
+- name: crete ssl profile by Dylan
+  bigip_profile_client_ssl:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    cert_key_chain: "{{ item.cert_key_chain }}"
+    ciphers: "{{ item.ciphers }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ bigip_profile_client_ssl }}"

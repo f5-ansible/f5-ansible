@@ -1,0 +1,7 @@
+bigip_profile_http_compression:
+  - name: http_compression
+    state: present
+    buffer_size: 4096
+    gzip_level:  1
+    gzip_memory_level: 8
+    gzip_window_size: 16

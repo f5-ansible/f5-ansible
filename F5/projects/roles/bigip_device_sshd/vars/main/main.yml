@@ -1,0 +1,5 @@
+bigip_device_sshd:
+  - banner: enabled
+    banner_text: you know what you are doing ?
+    inactivity_timeout: 600
+    login: enabled

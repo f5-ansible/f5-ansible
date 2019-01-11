@@ -1,0 +1,6 @@
+bigip_snat_pool:
+  - members:
+      - 20.20.20.251
+      - 20.20.20.250
+    name: snat_pool_20.20.20.251_and_250
+    state: present

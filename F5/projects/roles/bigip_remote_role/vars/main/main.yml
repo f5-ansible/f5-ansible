@@ -1,0 +1,20 @@
+bigip_remote_role:
+  - name: myrole-read
+    attribute_string: "F5-LTM-User-Info-1=f5read"
+    line_order: 1
+    state: present
+    assigned_role: "%F5-LTM-User-Role"
+    attribute_string: "F5-LTM-User-Info-1=f5read"
+    partition_access: "%F5-LTM-User-Partition"
+    terminal_access: "%F5-LTM-User-Shell"
+    remote_access: yes
+
+  - name: myrole-write
+    attribute_string: "F5-LTM-User-Info-1=f5write"
+    line_order: 2
+    state: present
+    assigned_role: "%F5-LTM-User-Role"
+    attribute_string: "F5-LTM-User-Info-1=f5write"
+    partition_access: "%F5-LTM-User-Partition"
+    terminal_access: "%F5-LTM-User-Shell"
+    remote_access: yes

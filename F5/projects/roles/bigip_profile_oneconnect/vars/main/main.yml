@@ -1,0 +1,10 @@
+bigip_profile_oneconnect:
+  - name: oneconnect_test
+    state: present
+    idle_timeout_override: disabled
+    limit_type: none
+    maximum_age: 86400
+    maximum_reuse: 1000
+    maximum_size: 10000
+    share_pools: yes
+    source_mask: 0.0.0.0

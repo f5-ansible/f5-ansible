@@ -1,0 +1,20 @@
+---
+bigip_monitor_http:
+  - name: http_1
+    send: 'GET /test1 HTTP/1.1 '
+    receive: '/test1/It works'
+    interval: 5
+    timeout: 16
+    time_until_up: 0
+  - name: http_2
+    send: 'GET /test2 HTTP/1.1 '
+    receive: '/test2/It works'
+    interval: 5
+    timeout: 16
+    time_until_up: 0
+  - name: http_3
+    send: 'GET /test3 HTTP/1.1 '
+    receive: '/test3/It works'
+    interval: 5
+    timeout: 16
+    time_until_up: 0

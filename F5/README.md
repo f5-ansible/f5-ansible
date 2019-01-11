@@ -8,4 +8,7 @@ LICENSE
 Apache 2.0
 
 INSTALLATION
+
 pip install f5-sdk bigsuds netaddr deepdiff
+
+ansible-playbook -i projects/inventory/hosts projects/main.yml

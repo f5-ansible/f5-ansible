@@ -1,0 +1,4 @@
+bigip_gtm_monitor_bigip:
+  - name: my_bigip
+    state: present
+    port: 514

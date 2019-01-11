@@ -1,0 +1,5 @@
+bigip_profile_udp:
+  - name: upd_1005
+    state: present
+    datagram_load_balancing: no
+    idle_timeout: 1005

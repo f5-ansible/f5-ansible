@@ -1,0 +1,15 @@
+- name: Creating a pool by Dylan
+  bigip_pool:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    description: "{{ item.description }}"
+    lb_method: "{{ item.lb_method }}"
+    monitor_type: "{{ item.monitor_type }}"
+    monitors:  "{{ item.monitors }}"
+    slow_ramp_time: "{{ item.slow_ramp_time }}"
+    server: "{{ F5_SERVER }}"
+    server_port: "{{ F5_SERVER_PORT }}"
+    user: "{{ F5_USER }}"
+    password: "{{ F5_PASSWORD }}"
+    validate_certs: "{{ F5_VALIDATE_CERTS }}"
+  loop: "{{ webpool }}"
