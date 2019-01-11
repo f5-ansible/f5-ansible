@@ -11,4 +11,4 @@ INSTALLATION
 
 pip install f5-sdk bigsuds netaddr deepdiff
 
-ansible-playbook -i projects/inventory/hosts projects/main.yml
+ansible-playbook -i projects/inventories/staging/hosts projects/main.yml
